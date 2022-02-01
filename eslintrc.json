@@ -1,0 +1,16 @@
+{
+	"extends": [
+		"airbnb", 
+		"airbnb/hooks",
+		"prettier",
+		"plugin:node/recommended"
+	],
+	"plugins": [
+		"prettier"
+	],
+	"rules": {
+		"no-unused-vars": "warn",
+		"func-names": "off"
+	}
+
+}
