@@ -10,9 +10,11 @@ app.use(express.json());
 app.use(cors());
 app.use(express.static(publicPath));
 
-app.get('/', (req, res) => {
-  res.status(200).send({});
-});
+if (process.env.ENV !== "production") {
+	app.get('/', (req, res) => {
+		res.status(200).send("job-application-organizer");
+	});
+}	
 
 // app.use("/users", usersRouter);
 app.get('*', (req, res) => {
