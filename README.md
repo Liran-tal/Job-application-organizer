@@ -1,3 +1,10 @@
+מסמך איפיון:
+כותרת
+פסקת תיאור של הפרויקט
+איור של הרכיבים (קליינט, שרת, מונגו)
+תיאור טכני של הרכיבים, מאיפה מגיע המידע ומורכבויות קיימות אם יש
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
