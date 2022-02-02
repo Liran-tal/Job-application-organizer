@@ -20,8 +20,8 @@
   ],
   "author": "Liran Tal",
   "license": "MIT",
-  "engines": { 
-    "node": "16.13.0" 
+  "engines": {
+    "node": "16.13.0"
   },
   "dependencies": {
     "axios": "^0.25.0",
@@ -32,18 +32,5 @@
     "mongoose": "^6.1.9",
     "path": "^0.12.7",
     "validator": "^13.7.0"
-  },
-  "devDependencies": {
-    "eslint": "^8.2.0",
-    "eslint-config-airbnb": "^19.0.4",
-    "eslint-config-node": "^4.1.0",
-    "eslint-config-prettier": "^8.3.0",
-    "eslint-plugin-import": "^2.25.3",
-    "eslint-plugin-jsx-a11y": "^6.5.1",
-    "eslint-plugin-node": "^11.1.0",
-    "eslint-plugin-prettier": "^4.0.0",
-    "eslint-plugin-react": "^7.28.0",
-    "eslint-plugin-react-hooks": "^4.3.0",
-    "prettier": "^2.5.1"
   }
 }

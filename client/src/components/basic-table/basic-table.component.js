@@ -1,16 +1,11 @@
 import React, { useMemo } from 'react';
 import { useTable } from 'react-table';
 import { COLUMNS } from '../../consts/columns/columns.const';
-import MOCK_DATA from '../../../../MOCK_DATA.json'
+import MOCK_DATA from '../../MOCK_DATA.json'
 
 function Table() {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => MOCK_DATA, []);
-
-	const table = useTable({
-		columns,
-		data
-	})
 
 	const {
 		getTableProps,
@@ -18,12 +13,15 @@ function Table() {
 		headerGroups,
 		rows,
 		prepareRow,
-	} = table
+	} = useTable({
+		columns,
+		data
+	});
 
 	return (
 		<table {...getTableProps()}>
 			<thead>
-				{headerGroups.map((headerGroup) => {
+				{headerGroups.map((headerGroup) => (
 					<tr {...headerGroup.getHeaderGroupProps()}>
 						{headerGroup.headers.map((column) => (
 							<th {...column.getHeaderProps()}>
@@ -31,7 +29,7 @@ function Table() {
 							</th>
 						))}
 					</tr>
-				})}
+				))}
 			</thead>
 			<tbody {...getTableBodyProps()}>
 				{rows.map((row) => {

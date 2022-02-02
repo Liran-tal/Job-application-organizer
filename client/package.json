@@ -22,15 +22,8 @@
   "eslintConfig": {
     "extends": [
       "react-app",
-      "react-app/jest",
-      "airbnb",
-      "airbnb/hooks",
-      "prettier"
-    ],
-    "rules": {
-      "no-unused-vars": "warn",
-      "func-names": "off"
-    }
+      "react-app/jest"
+    ]
   },
   "browserslist": {
     "production": [
