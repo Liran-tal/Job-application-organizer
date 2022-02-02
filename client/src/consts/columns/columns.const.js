@@ -1,3 +1,5 @@
+import { DateTime } from "luxon"
+
 export const COLUMNS = [
 	{
 		Header: 'Id',
@@ -17,7 +19,8 @@ export const COLUMNS = [
 	},
 	{
 		Header: 'Date of Birth',
-		accessor: 'date_of_birth'
+		accessor: 'date_of_birth',
+		Cell: ({ value }) => DateTime.fromISO(value).toLocaleString()
 	},
 	{
 		Header: 'Age',
