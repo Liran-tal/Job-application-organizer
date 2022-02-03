@@ -3,7 +3,8 @@ import {
 	useTable, 
 	useSortBy, 
 	useGlobalFilter, 
-	usePagination 
+	usePagination, 
+	useRowSelect
 } from 'react-table';
 import { COLUMNS } from '../../consts/columns/columns.const';
 import MOCK_DATA from '../../MOCK_DATA.json'
@@ -25,7 +26,9 @@ function Table() {
 		canNextPage,
 		pageOptions,
 		state,
-		setGlobalFilter
+		setGlobalFilter,
+		selectedFlatRows,
+		toggleRowSelected
 	} = useTable(
 		{
 			columns,
@@ -33,10 +36,11 @@ function Table() {
 		}, 
 		useGlobalFilter,
 		useSortBy,
-		usePagination
+		usePagination,
+		useRowSelect
 	);
 
-	const { globalFilter, pageIndex } = state;
+	const { globalFilter, pageIndex, selectedRowIds } = state;
 
 	return (
 		<>
@@ -67,7 +71,10 @@ function Table() {
 					{page.map((row) => {
 						prepareRow(row);
 						return (
-							<tr {...row.getRowProps()}>
+							<tr 
+								onClick={() => row.toggleRowSelected()}
+								{...row.getRowProps()}
+							>
 								{row.cells.map((cell) => (
 									<td {...cell.getCellProps()}>
 										{cell.render('Cell')}
@@ -97,6 +104,20 @@ function Table() {
 					Next
 				</button>
 			</div>
+			<pre>
+        <code>
+          {JSON.stringify(
+            {
+							selectedRowIds: selectedRowIds,
+							'selectedFlatRows[].original': selectedFlatRows.map(
+								d => d.original
+							),
+            },
+            null,
+            2
+          )}
+        </code>
+      </pre>
 		</>
 	);
 }
