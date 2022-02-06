@@ -18,7 +18,7 @@ import {
 import { COLUMNS } from '../../consts/columns/columns.const';
 import MOCK_DATA from '../../USER_MOCK_DATA.json'
 import TableGlobalFilter from '../table-global-filter/table-global-filter.component';
-import TableNav from '../table-nav/table-nav';
+import TableNav from '../table-nav/table-nav.component';
 
 function DataTable() {
 	const columns = useMemo(() => COLUMNS, []);
@@ -48,6 +48,8 @@ function DataTable() {
 		usePagination,
 		useRowSelect
 	);
+
+
 
 	const { globalFilter, pageIndex, selectedRowIds } = state;
 	// TODO: Destructure table to its own component and merge as user-table.page
