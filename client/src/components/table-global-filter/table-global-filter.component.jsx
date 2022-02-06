@@ -1,14 +1,14 @@
 import React from 'react';
+import {StyledTextField} from './table-global-filter.style'
 
 function TableGlobalFilter({ filter, setFilter }) {
 	return (
-		<div>
-			search {" "}
-			<input 
-				defaultValue={filter || ""}
-				onChange={(event) => setFilter(event.target.value)}
-			/>
-		</div>
+		<StyledTextField 
+			label="search" 
+			variant="outlined" 
+			defaultValue={filter || ""}
+			onChange={(event) => setFilter(event.target.value)}
+		/>
 	);
 }
 

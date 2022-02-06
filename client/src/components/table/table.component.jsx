@@ -50,7 +50,7 @@ function DataTable() {
 	);
 
 	const { globalFilter, pageIndex, selectedRowIds } = state;
-
+	// TODO: Destructure table to its own component and merge as user-table.page
 	return (
 		<StyledTableContainer>
 			<TableGlobalFilter
