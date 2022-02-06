@@ -1,7 +1,7 @@
 {
   "name": "job-application-organizer",
   "version": "1.0.0",
-  "description": "Helps organize your job search",
+  "description": "Helps organize job search process",
   "main": "server_index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -11,25 +11,31 @@
     "dev": "concurrently \"npm run server\" \"npm run client\"",
     "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Liran-tal/Job-application-organizer.git"
+  },
   "keywords": [
-    "REST",
+    "RESTful",
     "MongoDB",
     "Express",
     "React.js",
     "Node.js"
   ],
   "author": "Liran Tal",
-  "license": "MIT",
-  "engines": {
-    "node": "16.13.0"
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Liran-tal/Job-application-organizer/issues"
   },
+  "homepage": "https://github.com/Liran-tal/Job-application-organizer#readme",
   "dependencies": {
     "axios": "^0.25.0",
     "concurrently": "^7.0.0",
     "cors": "^2.8.5",
     "dotenv": "^15.0.0",
     "express": "^4.17.2",
-    "mongoose": "^6.1.9",
+    "luxon": "^2.3.0",
+    "mongoose": "^6.1.10",
     "path": "^0.12.7",
     "validator": "^13.7.0"
   }

@@ -1,25 +1,35 @@
 import React, { useMemo } from 'react';
-import { 
-	useTable, 
-	useSortBy, 
-	useGlobalFilter, 
-	usePagination, 
+import {
+	useTable,
+	useSortBy,
+	useGlobalFilter,
+	usePagination,
 	useRowSelect
 } from 'react-table';
+import { 
+	StyledTableContainer,
+	StyledTable,
+	StyledTHead,
+	StyledTBody,
+	StyledTRow,
+	StyledTCell,
+	StyledTHeadRow
+} from './table.style';
 import { COLUMNS } from '../../consts/columns/columns.const';
-import MOCK_DATA from '../../MOCK_DATA.json'
+import MOCK_DATA from '../../USER_MOCK_DATA.json'
 import TableGlobalFilter from '../table-global-filter/table-global-filter.component';
+import TableNav from '../table-nav/table-nav';
 
-function Table() {
+function DataTable() {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => MOCK_DATA, []);
 
 	const {
 		getTableProps,
 		getTableBodyProps,
+		prepareRow,
 		headerGroups,
 		page,
-		prepareRow,
 		previousPage,
 		canPreviousPage,
 		nextPage,
@@ -27,13 +37,12 @@ function Table() {
 		pageOptions,
 		state,
 		setGlobalFilter,
-		selectedFlatRows,
-		toggleRowSelected
+		selectedFlatRows
 	} = useTable(
 		{
 			columns,
 			data
-		}, 
+		},
 		useGlobalFilter,
 		useSortBy,
 		usePagination,
@@ -43,83 +52,73 @@ function Table() {
 	const { globalFilter, pageIndex, selectedRowIds } = state;
 
 	return (
-		<>
-			<TableGlobalFilter 
+		<StyledTableContainer>
+			<TableGlobalFilter
 				filter={globalFilter}
 				setFilter={setGlobalFilter}
 			/>
-			<table {...getTableProps()}>
-				<thead>
+			<StyledTable {...getTableProps()}>
+				<StyledTHead>
 					{headerGroups.map((headerGroup) => (
-						<tr {...headerGroup.getHeaderGroupProps()}>
+						<StyledTHeadRow {...headerGroup.getHeaderGroupProps()}>
 							{headerGroup.headers.map((column) => (
 								<th {...column.getHeaderProps(column.getSortByToggleProps())}>
 									{column.render('Header')}
 									<span>
-										{column.isSorted 
-											? (column.isSortedDesc 
+										{column.isSorted
+											? (column.isSortedDesc
 												? "\u25BE"
 												: "\u25B4")
 											: ""}
-									</span>	
+									</span>
 								</th>
 							))}
-						</tr>
+						</StyledTHeadRow>
 					))}
-				</thead>
-				<tbody {...getTableBodyProps()}>
-					{page.map((row) => {
+				</StyledTHead>
+				<StyledTBody {...getTableBodyProps()}>
+					{page.map((row, index) => {
 						prepareRow(row);
 						return (
-							<tr 
+							<StyledTRow
 								onClick={() => row.toggleRowSelected()}
-								{...row.getRowProps()}
+								{...row.getRowProps({index: index})}
 							>
 								{row.cells.map((cell) => (
-									<td {...cell.getCellProps()}>
+									<StyledTCell {...cell.getCellProps()}>
 										{cell.render('Cell')}
-									</td>
+									</StyledTCell>
 								))}
-							</tr>
+							</StyledTRow>
 						)
 					})}
-				</tbody>
-			</table>
-			<div>
-				<button 
-					onClick={previousPage}
-					disabled={!canPreviousPage}
-				>
-					Previous
-				</button>
-				<span>
-					<strong>
-						{pageIndex + 1} / {pageOptions.length}
-					</strong>
-				</span>
-				<button 
-					onClick={nextPage}
-					disabled={!canNextPage}
-				>
-					Next
-				</button>
-			</div>
+				</StyledTBody>
+			</StyledTable>
+			<TableNav
+				previousPage={previousPage}
+				canPreviousPage={canPreviousPage}
+				pageIndex={pageIndex}
+				pageOptions={pageOptions}
+				nextPage={nextPage}
+				canNextPage={canNextPage}
+			/>
+
 			<pre>
-        <code>
-          {JSON.stringify(
-            {
+				<code>
+					{JSON.stringify(
+						{
 							selectedRowIds: selectedRowIds,
 							'selectedFlatRows[].original': selectedFlatRows.map(
 								d => d.original
 							),
-            },
-            null,
-            2
-          )}
-        </code>
-      </pre>
-		</>
+						},
+						null,
+						2
+					)}
+				</code>
+			</pre>
+		</StyledTableContainer>
 	);
 }
 
-export default Table;
+export default DataTable;
