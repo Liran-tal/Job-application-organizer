@@ -6,6 +6,7 @@ function TableGlobalFilter({ filter, setFilter }) {
 		<StyledTextField 
 			label="search" 
 			variant="outlined" 
+			type="search"
 			defaultValue={filter || ""}
 			onChange={(event) => setFilter(event.target.value)}
 		/>
