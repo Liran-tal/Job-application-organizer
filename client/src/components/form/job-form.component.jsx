@@ -7,6 +7,7 @@ import Contact from "../form-fields/contact.component";
 import Interview from "../form-fields/interview.component";
 import MiscFields from "../form-fields/misc-fields.component";
 import { Box } from "@mui/material";
+import * as Axios from '../../api/Axios.Api';
 
 
 function JobForm() {
@@ -15,7 +16,14 @@ function JobForm() {
 
 	const handleSubmit = async (event) => {
 		event.preventDefault();
-		
+		try {
+			if (isNew) {
+				Axios.createJob
+			}
+			Axios.updateJob
+		} catch (error) {
+			
+		}
 	};
 
 	const handleChangeForm = (component, componentName) => {
