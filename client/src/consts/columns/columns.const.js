@@ -1,5 +1,4 @@
-import { DateTime } from "luxon"
-
+import { format } from "date-fns";
 export const COLUMNS = [
 	{
 		Header: 'Position Title',
@@ -8,7 +7,7 @@ export const COLUMNS = [
 	{
 		Header: 'Date Applied',
 		accessor: 'position.dateApplied',
-		Cell: ({ value }) => DateTime.fromISO(value).toLocaleString()
+		Cell: ({ value }) => format(new Date(value, 'dd/mm/yyyy'))
 	},
 	{
 		Header: 'Company Name',
@@ -35,7 +34,7 @@ export const COLUMNS = [
 		accessor: 'interview.date',
 		Cell: ({ value }) => {
 			if (value) {
-				return DateTime.fromISO(value).toLocaleString();
+				return format(new Date(value, 'dd/mm/yyyy'));
 			}
 			return "";
 		}

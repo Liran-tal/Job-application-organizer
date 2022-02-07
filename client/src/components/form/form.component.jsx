@@ -1,7 +1,8 @@
 import React, { useState } from "react";
 import TextField from '@mui/material/TextField';
-import * as FormMethods from '../../utils/form-fns.utils';
 import { Stack, Typography } from "@mui/material";
+import * as FormMethods from '../../utils/form-fns.utils'
+import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
 // "position": {
 // 			"title": "Environmental Tech",
@@ -56,6 +57,7 @@ function JobForm() {
 						multiline
           	rows={4}
 				/>
+				<DateTimeWidget date={new Date()} />
 			</Stack>
       {/* <input type="submit" /> */}
     </form>
