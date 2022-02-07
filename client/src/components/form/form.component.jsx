@@ -1,9 +1,14 @@
 import React, { useState } from "react";
-import TextField from '@mui/material/TextField';
 import { Stack, Typography } from "@mui/material";
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import * as FormMethods from '../../utils/form-fns.utils'
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
+import Position from "../form-fields/position.component";
+import Company from "../form-fields/company.component";
+import Contact from "../form-fields/contact.component";
+import Interview from "../form-fields/interview.component";
 // "position": {
 // 			"title": "Environmental Tech",
 // 			"description": "Cras non velit nec nisi vulputate nonummy. Maecenas tincidunt lacus at velit. Vivamus vel nulla eget eros elementum pellentesque.\n\nQuisque porta volutpat erat. Quisque erat eros, viverra eget, congue eget, semper rutrum, nulla. Nunc purus.",
@@ -28,37 +33,28 @@ import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
 
 
 function JobForm() {
-	// console.log(USER_MOCK_DATA);
-	// const demoData = JSON.parse(USER_MOCK_DATA);
+
 	const [job, setJob] = useState(USER_MOCK_DATA[0]);
+
+	const handleInterviewChange = ({ target: {value} }) => {
+
+	}
 
   return (
     <form onSubmit={FormMethods.handleSubmit}>
-			<Typography variant="h5" gutterBottom component="div">
-        Position:
-      </Typography>
-			<Stack
-				direction="column"
-				justifyContent="center"
-				alignItems="center"
-				spacing={{ sm: 1, md: 2, lg: 4 }}
-			>
-				<TextField
-						required
-						label="Title"
-						defaultValue={job.position.title}
-						variant="standard"
-						// helperText="Position Title is requiered"
-				/>
-				<TextField
-						label="Description"
-						defaultValue={job.position.description}
-						// variant=""
-						multiline
-          	rows={4}
-				/>
-				<DateTimeWidget date={new Date()} />
-			</Stack>
+			<Position 
+				position={job.position}
+			/>
+			<Company 
+				company={job.company}
+			/>
+			<Contact
+				contact={job.contact}
+			/>
+			<Interview
+				interview={job.interview}
+				handleInterviewChange={handleInterviewChange}
+			/>
       {/* <input type="submit" /> */}
     </form>
   );

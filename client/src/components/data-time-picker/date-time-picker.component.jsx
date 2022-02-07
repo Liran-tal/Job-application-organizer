@@ -4,9 +4,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 
-
-
-function DateTimeWidget({ date }) {
+function DateTimeWidget({ date, label }) {
   const [selectedDate, setSelectedDate] = useState(date);
 
   const handleDateChange = (date) => {
@@ -19,7 +17,7 @@ function DateTimeWidget({ date }) {
       <LocalizationProvider dateAdapter={AdapterDateFns}>
         <DateTimePicker
           renderInput={(props) => <TextField {...props} />}
-          label="DateTimePicker"
+          label={label}
           value={selectedDate}
           onChange={(newValue) => {
             handleDateChange(newValue);
