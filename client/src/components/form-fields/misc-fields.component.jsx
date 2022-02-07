@@ -17,13 +17,13 @@ function MiscFields({ followUp, applicationStatus }) {
 		>
 			<TextField
 				select
-				label="Select"
-				value={interview.format}
+				label="Follow-Up Format"
+				value={followUp}
 				// onChange={handleChange}
-				helperText="Please Select Interview Format"
+				helperText="Please Select Follow-up Format"
 				variant="standard"
 			>
-				{INTERVIEW_FORMATS.map((option) => (
+				{FOLLOW_UP_OPS.map((option) => (
 					<MenuItem key={option.value} value={option.value}>
 						{option.label}
 					</MenuItem>
@@ -31,13 +31,13 @@ function MiscFields({ followUp, applicationStatus }) {
 			</TextField>
 			<TextField
 				select
-				label="Select"
-				value={interview.format}
+				label="Application Status"
+				value={applicationStatus}
 				// onChange={handleChange}
-				helperText="Please Select Interview Format"
+				helperText="Please Select Application Status"
 				variant="standard"
 			>
-				{INTERVIEW_FORMATS.map((option) => (
+				{APPLICATION_STATUS_OPS.map((option) => (
 					<MenuItem key={option.value} value={option.value}>
 						{option.label}
 					</MenuItem>

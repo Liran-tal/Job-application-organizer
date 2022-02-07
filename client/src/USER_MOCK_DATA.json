@@ -19,7 +19,7 @@
 			"date": "2022-04-27T17:46:49Z",
 			"format": "Online"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -65,7 +65,7 @@
 			"date": "2022-04-27T13:10:39Z",
 			"format": "Phone"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -85,10 +85,10 @@
 			"phone": "684-911-7911"
 		},
 		"interview": {
-			"date": null,
-			"format": null
+			"date": "",
+			"format": ""
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Declined"
 	},
 	{
@@ -108,10 +108,10 @@
 			"phone": "202-940-9741"
 		},
 		"interview": {
-			"date": null,
-			"format": null
+			"date": "",
+			"format": ""
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Declined"
 	},
 	{
@@ -157,7 +157,7 @@
 			"date": "2022-04-25T10:36:11Z",
 			"format": "Online"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -180,7 +180,7 @@
 			"date": "2022-04-24T21:51:09Z",
 			"format": "Phone"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -203,7 +203,7 @@
 			"date": "2022-04-30T09:18:00Z",
 			"format": "Phone"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -272,7 +272,7 @@
 			"date": "2022-04-25T10:36:11Z",
 			"format": "Online"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -295,7 +295,7 @@
 			"date": "2022-04-24T21:51:09Z",
 			"format": "Phone"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -318,7 +318,7 @@
 			"date": "2022-04-30T09:18:00Z",
 			"format": "Phone"
 		},
-		"followUp": null,
+		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{

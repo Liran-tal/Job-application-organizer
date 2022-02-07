@@ -22,7 +22,7 @@ function Interview(interview) {
 			/>
 			<TextField
 				select
-				label="Select"
+				label="Interview Format"
 				value={interview.format}
 				// onChange={handleChange}
 				helperText="Please Select Interview Format"
