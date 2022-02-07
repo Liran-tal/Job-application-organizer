@@ -1,9 +1,5 @@
 export const INTERVIEW_FORMATS = [
 	{
-    value: " ",
-    label: " ",
-  },
-	{
     value: "Frontal",
     label: "Frontal",
   },

@@ -5,7 +5,19 @@ import MenuItem from '@mui/material/MenuItem';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 import { INTERVIEW_FORMATS } from '../../consts/form-fields/form-fields.consts'
 
-function Interview(interview) {
+function Interview({ interview, handleChangeForm }) {
+
+	const handleChange = (target) => {
+		console.log(target.value);
+		interview = {
+			...interview,
+			[target.name]: target.value
+		}
+		console.log("in component", interview);
+		
+		handleChangeForm(interview, "interview");
+	}
+
 	return (
 		<Stack
 			direction="column"
@@ -17,14 +29,17 @@ function Interview(interview) {
 				Interview
 			</Typography>
 			<DateTimeWidget
+				name="date"
+				handleChange={handleChange}
 				label={"Date of Next Interview"}
 				date={interview.date}
 			/>
 			<TextField
+				name="format"
+				onChange={({target}) => handleChange(target)}
 				select
 				label="Interview Format"
 				value={interview.format}
-				// onChange={handleChange}
 				helperText="Please Select Interview Format"
 				variant="standard"
 			>

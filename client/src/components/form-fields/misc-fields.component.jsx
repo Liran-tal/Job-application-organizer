@@ -7,7 +7,8 @@ import {
 	APPLICATION_STATUS_OPS
 } from '../../consts/form-fields/form-fields.consts'
 
-function MiscFields({ followUp, applicationStatus }) {
+function MiscFields({ followUp, applicationStatus, handleChangeForm }) {
+
 	return (
 		<Stack
 			direction="column"
@@ -17,9 +18,10 @@ function MiscFields({ followUp, applicationStatus }) {
 		>
 			<TextField
 				select
+				name="followUp"
+				onChange={({target}) => handleChangeForm(target.value, target.name)}
 				label="Follow-Up Format"
 				value={followUp}
-				// onChange={handleChange}
 				helperText="Please Select Follow-up Format"
 				variant="standard"
 			>
@@ -30,10 +32,11 @@ function MiscFields({ followUp, applicationStatus }) {
 				))}
 			</TextField>
 			<TextField
+				name="applicationStatus"
+				onChange={({target}) => handleChangeForm(target.value, target.name)}
 				select
 				label="Application Status"
 				value={applicationStatus}
-				// onChange={handleChange}
 				helperText="Please Select Application Status"
 				variant="standard"
 			>

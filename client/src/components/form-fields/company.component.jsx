@@ -2,7 +2,19 @@ import React from 'react';
 import { Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 
-function Company(company) {
+function Company({ company, handleChangeForm }) {
+
+	const handleChange = (target) => {
+		console.log(target.value);
+		company = {
+			...company,
+			[target.name]: target.value
+		}
+		console.log("in component", company);
+		
+		handleChangeForm(company, "company");
+	}
+
 	return (
 		<Stack
 			direction="column"
@@ -15,6 +27,8 @@ function Company(company) {
 			</Typography>
 			<TextField
 					type="text"
+					name="name"
+					onChange={({target}) => handleChange(target)}
 					required
 					label="Name"
 					defaultValue={company.name}
@@ -23,6 +37,8 @@ function Company(company) {
 			/>
 			<TextField
 					type="text"
+					name="location"
+					onChange={({target}) => handleChange(target)}
 					label="Location"
 					defaultValue={company.location}
 					variant="standard"
