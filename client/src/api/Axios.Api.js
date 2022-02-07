@@ -1,37 +1,99 @@
 import axios from "axios";
 
-
-const uri = process.env.ENV === "production" 
-	? "https://job-application-organizer.herokuapp.com/api" 
-	: "http://localhost:8080/users/api";
+const uri = process.env.ENV === "production"
+  ? "https://job-application-organizer.herokuapp.com/api"
+  : "http://localhost:8080/api";
 const ApiHeader = axios.create({ baseURL: uri, })
 
-export default class Axios {
+export const getUserById = async (id) => {
+  try {
+    const { data } = await ApiHeader.get('/users/get-user-by-id', {
+      query: {
+        id
+      }      
+    });
+    return data;
 
-  static getUsers = async (id) => {
-		try {
-			const {data} = await ApiHeader.get('/users', {
-        query: {
-          id: id ? `${id}` : ""
-        }
-      }); 
-			return data;
-			
-		} catch (error) {
-			console.error(error);
-			return error
-		}
-  } 
-
-  static addItem = async (item) => {
-    return await ApiHeader.post('/users',item);
-  }
-  
-  static editItem = async (itemId, newItem) => {
-    return await ApiHeader.put('/users', itemId, newItem);
-  }
-  
-  static deleteItem = async (itemId) => {
-    return await ApiHeader.delete('/users', itemId);
+  } catch (error) {
+    console.error(error);
+    return error
   }
 }
+
+export const getJobs = async (userId, jobId) => {
+  try {
+    const { data } = await ApiHeader.get('/users/get-jobs', {
+      query: {
+        userId,
+        jobId: jobId || ""
+      }
+    });
+    return data;
+
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
+export const addUser = async (newUser) => {
+  try {
+    return await ApiHeader.post('/users/create-user', {
+      body: {
+        newUser
+      }   
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
+export const addJob = async (userId, newJob) => {
+  try {
+    return await ApiHeader.post('/users/create-job', {
+      query: {
+        userId
+      },   
+      body: {
+        newJob
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
+export const updateJob = async (userId, jobId) => {
+  try {
+    return await ApiHeader.put('/users/update-job', {
+      query: {
+        userId
+      },   
+      body: {
+        jobId
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
+export const deleteItem = async (userId, jobId) => {
+  try {
+    return await ApiHeader.put('/users/delete-job', {
+      query: {
+        userId
+      },   
+      body: {
+        jobId
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+

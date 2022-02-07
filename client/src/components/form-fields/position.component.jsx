@@ -47,7 +47,7 @@ function Position({ position, handleChangeForm }) {
 				/>
 				<DateTimeWidget 
 					name="dateApplied"
-					onChange={({target}) => handleChange(target)}
+					handleChange={handleChange}
 					required 
 					label={"Date Applied"}
 					date={position.dateApplied} 

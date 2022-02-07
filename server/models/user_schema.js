@@ -21,31 +21,58 @@ const user = new mongoose.Schema({
 			position: {
 				title: {
 					type: String,
-
+					required: true
 				},
 				description: {
-
+					type: String,
 				},
 				dateApplied: {
-
+					type: Date,
+					required: true
 				}
 			},
 			company: {
-				name: Oyoba,
-				location: Sarishābāri
+				name: {
+					type: String,
+					required: true
+				},
+				location: {
+					type: String,
+				}
 			},
 			contact: {
-				name: Tragelaphus angasi,
-				position: VP Quality Control,
-				email: cbarca0@dropbox.com,
-				phone: 313-424-4087
+				name: {
+					type: String,
+					required: true
+				},
+				position: {
+					type: String,
+					required: true
+				},
+				email: {
+					type: email,
+					required: true
+				},
+				phone: {
+					type: String,
+				}
 			},
 			interview: {
-				date: 2022-04-27T17:46:49Z,
-				format: Online
+				date: {
+					type: Date,
+				},
+				format: {
+					type: String,
+				}
 			},
-			followUp: ,
-			applicationStatus: Ongoing
+			followUp: {
+				type: String,
+				required: true
+			},
+			applicationStatus: {
+				type: String,
+				required: true
+			}
 		}
 	]
 });
