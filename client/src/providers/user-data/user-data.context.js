@@ -3,7 +3,7 @@ import React, { useContext, useState } from 'react';
 const GetUserContext = React.createContext(null);
 const SetUserContext = React.createContext(null);
 
-export const useReciptContext = () => {
+export const useUserContext = () => {
   return useContext(GetUserContext);
 };
 

@@ -65,9 +65,6 @@ export const StyledTHeadRow = styled(TableRow, Theme, {
 	width: "100%",
 	backgroundColor: Theme.palette.primary.dark,
 	color: "white",
-	// padding: "1rem",
-	// height: "3rem",
-	// lineHeight: "2rem"
 	"th": {
 		paddingTop: "1rem",
 		paddingBottom: "1rem",

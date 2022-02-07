@@ -1,30 +1,26 @@
-import React, { useState } from "react";
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
-import Position from "../form-fields/position.component";
-import Company from "../form-fields/company.component";
-import Contact from "../form-fields/contact.component";
-import Interview from "../form-fields/interview.component";
-import MiscFields from "../form-fields/misc-fields.component";
-import { Box } from "@mui/material";
-import * as Axios from '../../api/Axios.Api';
+import Position from '../form-fields/position.component';
+import Company from '../form-fields/company.component';
+import Contact from '../form-fields/contact.component';
+import Interview from '../form-fields/interview.component';
+import MiscFields from '../form-fields/misc-fields.component';
+import { Box } from '@mui/material';
+import * as UserData from '../../providers/user-data/user-data.context';
+import { handleSubmit } from '../../utils/form-utils'
+import { StyledForm } from './job-form.style';
 
-
-function JobForm() {
-
+function JobForm({ isNew }) {
 	const [job, setJob] = useState(USER_MOCK_DATA[0]);
+	const userData = UserData.useUserContext()
+	const setUserData = UserData.useSetUserContext();
 
-	const handleSubmit = async (event) => {
-		event.preventDefault();
-		try {
-			if (isNew) {
-				Axios.createJob
-			}
-			Axios.updateJob
-		} catch (error) {
-			
-		}
-	};
+	const onSubmit = (event) => {
+		event.preventDefault();	
+		
+		handleSubmit(userData, setUserData, job, isNew);
+	}
 
 	const handleChangeForm = (component, componentName) => {
 		setJob({
@@ -34,10 +30,10 @@ function JobForm() {
 	}
 
 	return (
-		<Box 
-			onSubmit={handleSubmit}
+		<StyledForm
+			onSubmit={onSubmit}
 			component="form"
-      autoComplete="off"
+			autoComplete="off"
 		>
 			<Position
 				position={job.position}
@@ -67,7 +63,7 @@ function JobForm() {
 			>
 				Save
 			</Button>
-		</Box>
+		</StyledForm>
 	);
 }
 

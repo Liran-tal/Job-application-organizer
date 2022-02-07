@@ -5,7 +5,7 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from './styles/theme.style'
 import { UserProvider } from './providers/user-data/user-data.context';
-import AppRoutes from './routs';
+// import AppRoutes from './routs';
 import './styles/App.css';
 
 import JobForm from './components/form/job-form.component';
