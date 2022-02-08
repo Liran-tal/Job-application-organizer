@@ -17,8 +17,7 @@ function JobForm({ isNew }) {
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 
-	const onSubmit = (event) => {
-		event.preventDefault();	
+	const onSubmit = () => {
 		
 		handleSubmit(userData, setUserData, job, isNew);
 	}
@@ -73,6 +72,7 @@ function JobForm({ isNew }) {
 				isNew={isNew}
 				isEdit={isEdit}
 				setIsEdit={setIsEdit}
+				onSubmit={onSubmit}
 			/>
 		</StyledForm>
 	);

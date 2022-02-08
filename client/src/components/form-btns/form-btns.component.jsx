@@ -4,9 +4,16 @@ import { Button, Container } from '@mui/material';
 import { Theme } from '../../styles/theme.style';
 import { handleJobDelete } from '../../utils/form-utils';
 
-function FormButtons(isNew, isEdit, setIsEdit) {
+function FormButtons(isNew, isEdit, setIsEdit, onSubmit) {
 	let navigate = useNavigate();
-	
+
+	const onClickSave = () => {
+		if (isEdit) {
+			onSubmit();
+		}  
+		setIsEdit(!isEdit);
+	}
+
 	return (
 		<Container>
 			<Button
@@ -24,6 +31,7 @@ function FormButtons(isNew, isEdit, setIsEdit) {
 				name="save"
 				value={isEdit}
 				variant="contained"
+				onClick={onClickSave}
 			>
 				{isEdit ? "Save" : "Edit"}
 			</Button>
@@ -31,8 +39,11 @@ function FormButtons(isNew, isEdit, setIsEdit) {
 				name="return"
 				variant="contained"
 				onClick={() => navigate('/user')}
+				sx={{
+					backgroundColor: Theme.palette.accent.main
+				}}
 			>
-				{isEdit ? "Save" : "Edit"}
+				Return
 			</Button>
 		</Container>
 	);

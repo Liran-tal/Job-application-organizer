@@ -21,7 +21,7 @@ function App() {
               {/* <NavBar></NavBar> */}
               {/* <AppRoutes /> */}
               {/* <FeaturedTable /> */}
-              <JobForm isNew={false} />
+              <JobForm isNew={true} />
               {/* <BasicTable /> */}
             </LocalizationProvider>
           </UserProvider>

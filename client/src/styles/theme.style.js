@@ -10,7 +10,9 @@ export const Theme = createTheme({
       main: grey[400],
     },
     accent: {
+      light: lightGreen[700], 
       main: lightGreen[800],
+      dark: lightGreen[900],
     },
     complementary: '#96000f',
   },
