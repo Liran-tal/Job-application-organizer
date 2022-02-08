@@ -13,6 +13,7 @@ import { StyledForm } from './job-form.style';
 
 function JobForm({ isNew }) {
 	const [job, setJob] = useState(USER_MOCK_DATA[0]);
+	const [isEdit, setIsEdit] = useState(isNew);
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 
@@ -43,23 +44,28 @@ function JobForm({ isNew }) {
 				<Position
 					position={job.position}
 					name="position"
+					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
 				<Contact
 					contact={job.contact}
+					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
 				<Company
 					company={job.company}
 					handleChangeForm={handleChangeForm}
+					isEdit={isEdit}
 				/>
 				<Interview
 					interview={job.interview}
+					followUp={job.followUp}
+					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
 				<MiscFields
-					followUp={job.followUp}
 					applicationStatus={job.applicationStatus}
+					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
 			</Grid>

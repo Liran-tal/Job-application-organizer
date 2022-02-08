@@ -3,16 +3,13 @@ import { Grid, Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 
 
-function Contact({ contact, handleChangeForm }) {
+function Contact({ contact, handleChangeForm, isEdit }) {
 
 	const handleChange = (target) => {
-		console.log(target.value);
 		contact = {
 			...contact,
 			[target.name]: target.value
 		}
-		console.log("in component", contact);
-		
 		handleChangeForm(contact, "contact");
 	}
 
@@ -35,6 +32,9 @@ function Contact({ contact, handleChangeForm }) {
 						label="Name"
 						defaultValue={contact.name}
 						variant="standard"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 						// helperText="Position Title is requiered"
 				/>
 				<TextField
@@ -44,6 +44,9 @@ function Contact({ contact, handleChangeForm }) {
 						label="Position"
 						defaultValue={contact.position}
 						variant="standard"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 				/>
 				<TextField
 						type="email"
@@ -53,6 +56,9 @@ function Contact({ contact, handleChangeForm }) {
 						label="Email Address"
 						defaultValue={contact.email}
 						variant="standard"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 						/>
 				<TextField
 						type="text"
@@ -62,6 +68,9 @@ function Contact({ contact, handleChangeForm }) {
 						defaultValue={contact.phone}
 						variant="standard"
 						helperText="Enter In Format: xxx-xxx-xxxx"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 				/>
 			</Stack>
 		</Grid>

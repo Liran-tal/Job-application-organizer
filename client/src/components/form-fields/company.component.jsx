@@ -2,16 +2,13 @@ import React from 'react';
 import { Grid, Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 
-function Company({ company, handleChangeForm }) {
+function Company({ company, handleChangeForm, isEdit }) {
 
 	const handleChange = (target) => {
-		console.log(target.value);
 		company = {
 			...company,
 			[target.name]: target.value
-		}
-		console.log("in component", company);
-		
+		}		
 		handleChangeForm(company, "company");
 	}
 
@@ -34,6 +31,9 @@ function Company({ company, handleChangeForm }) {
 						label="Name"
 						defaultValue={company.name}
 						variant="standard"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 						// helperText="Position Title is requiered"
 				/>
 				<TextField
@@ -43,6 +43,9 @@ function Company({ company, handleChangeForm }) {
 						label="Location"
 						defaultValue={company.location}
 						variant="standard"
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 				/>
 			</Stack>
 		</Grid>

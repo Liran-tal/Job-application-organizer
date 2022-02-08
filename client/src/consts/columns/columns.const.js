@@ -7,7 +7,7 @@ export const COLUMNS = [
 	{
 		Header: 'Date Applied',
 		accessor: 'position.dateApplied',
-		Cell: ({ value }) => format(new Date(value, 'dd/mm/yyyy'))
+		Cell: ({ value }) => format(new Date(value), 'dd/mm/yyyy')
 	},
 	{
 		Header: 'Company Name',
@@ -34,7 +34,7 @@ export const COLUMNS = [
 		accessor: 'interview.date',
 		Cell: ({ value }) => {
 			if (value) {
-				return format(new Date(value, 'dd/mm/yyyy'));
+				return format(new Date(value), 'dd/mm/yyyy');
 			}
 			return "";
 		}

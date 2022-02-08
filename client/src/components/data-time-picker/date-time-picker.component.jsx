@@ -4,7 +4,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
 import DateTimePicker from '@mui/lab/DateTimePicker';
 
-function DateTimeWidget({ name, date, label, handleChange }) {
+function DateTimeWidget({ name, date, label, handleChange, isEdit }) {
 
   return (
     <div>
@@ -15,6 +15,7 @@ function DateTimeWidget({ name, date, label, handleChange }) {
           label={label}
           value={date}
           onChange={(event) => handleChange({ name: name, value: event })}
+          readOnly={!isEdit}
         />
       </LocalizationProvider>
     </div>

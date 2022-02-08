@@ -5,11 +5,12 @@ import { BrowserRouter } from 'react-router-dom';
 import { ThemeProvider } from '@mui/material/styles';
 import { Theme } from './styles/theme.style'
 import { UserProvider } from './providers/user-data/user-data.context';
-// import AppRoutes from './routs';
+// import AppRoutes from './routs/routs';
 import './styles/App.css';
 
 import JobForm from './components/form/job-form.component';
-// import Table from './components/table/table.component';
+// import BasicTable from './components/basic-table/basic-table.component';
+// import FeaturedTable from './components/featured-table/featured-table.component';
 function App() {
   return (
     <div className="App">
@@ -19,8 +20,9 @@ function App() {
             <LocalizationProvider dateAdapter={AdapterDateFns}>
               {/* <NavBar></NavBar> */}
               {/* <AppRoutes /> */}
-              {/* <Table /> */}
-              <JobForm />
+              {/* <FeaturedTable /> */}
+              <JobForm isNew={false} />
+              {/* <BasicTable /> */}
             </LocalizationProvider>
           </UserProvider>
         </BrowserRouter>

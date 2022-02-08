@@ -13,4 +13,7 @@ export const StyledForm = styled(Box, Theme, {
 	justifyContent: "space-around",
 	alignItems: "center",
 	padding: "2rem",
+	margin: "2rem",
+	border: `1px solid ${Theme.palette.secondary.light}`,
+	borderRadius: "15px"
 }));

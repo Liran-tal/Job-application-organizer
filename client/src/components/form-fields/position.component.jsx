@@ -3,16 +3,13 @@ import { Grid, Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 
-function Position({ position, handleChangeForm }) {
+function Position({ position, handleChangeForm, isEdit }) {
 
 	const handleChange = (target) => {
-		console.log(target.value);
 		position = {
 			...position,
 			[target.name]: target.value
 		}
-		console.log("in component", position);
-		
 		handleChangeForm(position, "position");
 	}
 	
@@ -35,6 +32,9 @@ function Position({ position, handleChangeForm }) {
 						defaultValue={position.title}
 						variant="standard"
 						onChange={({target}) => handleChange(target)}
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 						// helperText="Position Title is requiered"
 				/>
 				<TextField
@@ -45,6 +45,9 @@ function Position({ position, handleChangeForm }) {
 						onChange={({target}) => handleChange(target)}
 						multiline
 						rows={4}
+						InputProps={{
+							readOnly: !isEdit,
+						}}
 				/>
 				<DateTimeWidget 
 					name="dateApplied"
@@ -52,6 +55,7 @@ function Position({ position, handleChangeForm }) {
 					required 
 					label={"Date Applied"}
 					date={position.dateApplied} 
+					isEdit={isEdit}
 				/>
 			</Stack>
 		</Grid>

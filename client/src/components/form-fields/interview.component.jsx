@@ -4,16 +4,15 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 import { INTERVIEW_FORMATS } from '../../consts/form-fields/form-fields.consts'
+import { FOLLOW_UP_OPS, } from '../../consts/form-fields/form-fields.consts'
 
-function Interview({ interview, handleChangeForm }) {
+function Interview({ followUp, interview, handleChangeForm, isEdit }) {
 
 	const handleChange = (target) => {
-		console.log(target.value);
 		interview = {
 			...interview,
 			[target.name]: target.value
 		}
-		console.log("in component", interview);
 		
 		handleChangeForm(interview, "interview");
 	}
@@ -34,6 +33,7 @@ function Interview({ interview, handleChangeForm }) {
 					handleChange={handleChange}
 					label={"Date of Next Interview"}
 					date={interview.date}
+					isEdit={isEdit}
 				/>
 				<TextField
 					name="format"
@@ -43,8 +43,29 @@ function Interview({ interview, handleChangeForm }) {
 					value={interview.format}
 					helperText="Please Select Interview Format"
 					variant="standard"
+					InputProps={{
+						readOnly: !isEdit,
+					}}
 				>
 					{INTERVIEW_FORMATS.map((option) => (
+						<MenuItem key={option.value} value={option.value}>
+							{option.label}
+						</MenuItem>
+					))}
+				</TextField>
+				<TextField
+					select
+					name="followUp"
+					onChange={({target}) => handleChange(target)}
+					label="Follow-Up Format"
+					value={followUp}
+					helperText="Please Select Follow-up Format"
+					variant="standard"
+					InputProps={{
+						readOnly: !isEdit,
+					}}
+				>
+					{FOLLOW_UP_OPS.map((option) => (
 						<MenuItem key={option.value} value={option.value}>
 							{option.label}
 						</MenuItem>

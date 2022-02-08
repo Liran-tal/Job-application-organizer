@@ -14,13 +14,13 @@ import {
 	StyledTRow,
 	StyledTCell,
 	StyledTHeadRow
-} from './table.style';
+} from './featured-table.style';
 import { COLUMNS } from '../../consts/columns/columns.const';
 import MOCK_DATA from '../../USER_MOCK_DATA.json'
 import TableGlobalFilter from '../table-global-filter/table-global-filter.component';
 import TableNav from '../table-nav/table-nav.component';
 
-function DataTable() {
+function FeaturedTable() {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => MOCK_DATA, []);
 
@@ -123,4 +123,4 @@ function DataTable() {
 	);
 }
 
-export default DataTable;
+export default FeaturedTable;
