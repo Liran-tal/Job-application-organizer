@@ -9,7 +9,7 @@ const {
 	updateJobControler,
 	deleteJobControler,
 
-} = require ("../controlers/users/users_controlers.js");
+} = require ("../controllers/users/users_controllers.js");
 
 Router.post("/create-user", createUserControler);
 
