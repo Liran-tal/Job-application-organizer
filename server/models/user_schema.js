@@ -70,11 +70,11 @@ const user = new mongoose.Schema({
 				},
 				format: {
 					type: String,
-				}
-			},
-			followUp: {
-				type: String,
-				required: true
+				},
+				followUp: {
+					type: String,
+					required: true
+				},
 			},
 			applicationStatus: {
 				type: String,

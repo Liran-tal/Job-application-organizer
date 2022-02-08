@@ -17,9 +17,9 @@
 		},
 		"interview": {
 			"date": "2022-04-27T17:46:49Z",
-			"format": "Online"
+			"format": "Online",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -40,9 +40,9 @@
 		},
 		"interview": {
 			"date": "2022-05-20T08:20:29Z",
-			"format": "Frontal"
+			"format": "Frontal",
+			"followUp": "Mail"
 		},
-		"followUp": "Mail",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -63,9 +63,9 @@
 		},
 		"interview": {
 			"date": "2022-04-27T13:10:39Z",
-			"format": "Phone"
+			"format": "Phone",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -86,9 +86,9 @@
 		},
 		"interview": {
 			"date": "",
-			"format": ""
+			"format": "",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Declined"
 	},
 	{
@@ -109,9 +109,9 @@
 		},
 		"interview": {
 			"date": "",
-			"format": ""
+			"format": "",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Declined"
 	},
 	{
@@ -132,9 +132,9 @@
 		},
 		"interview": {
 			"date": "2022-05-27T09:10:09Z",
-			"format": "Frontal"
+			"format": "Frontal",
+			"followUp": "Mail"
 		},
-		"followUp": "Mail",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -155,9 +155,9 @@
 		},
 		"interview": {
 			"date": "2022-04-25T10:36:11Z",
-			"format": "Online"
+			"format": "Online",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -178,9 +178,9 @@
 		},
 		"interview": {
 			"date": "2022-04-24T21:51:09Z",
-			"format": "Phone"
+			"format": "Phone",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -201,9 +201,9 @@
 		},
 		"interview": {
 			"date": "2022-04-30T09:18:00Z",
-			"format": "Phone"
+			"format": "Phone",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -224,9 +224,9 @@
 		},
 		"interview": {
 			"date": "2022-05-30T11:20:25Z",
-			"format": "Online"
+			"format": "Online",
+			"followUp": "Phone"
 		},
-		"followUp": "Phone",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -247,9 +247,9 @@
 		},
 		"interview": {
 			"date": "2022-05-27T09:10:09Z",
-			"format": "Frontal"
+			"format": "Frontal",
+			"followUp": "Mail"
 		},
-		"followUp": "Mail",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -270,9 +270,9 @@
 		},
 		"interview": {
 			"date": "2022-04-25T10:36:11Z",
-			"format": "Online"
+			"format": "Online",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -293,9 +293,9 @@
 		},
 		"interview": {
 			"date": "2022-04-24T21:51:09Z",
-			"format": "Phone"
+			"format": "Phone",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -316,9 +316,9 @@
 		},
 		"interview": {
 			"date": "2022-04-30T09:18:00Z",
-			"format": "Phone"
+			"format": "Phone",
+			"followUp": ""
 		},
-		"followUp": "",
 		"applicationStatus": "Ongoing"
 	},
 	{
@@ -339,9 +339,9 @@
 		},
 		"interview": {
 			"date": "2022-05-30T11:20:25Z",
-			"format": "Online"
+			"format": "Online",
+			"followUp": "Phone"
 		},
-		"followUp": "Phone",
 		"applicationStatus": "Ongoing"
 	}
 ]
