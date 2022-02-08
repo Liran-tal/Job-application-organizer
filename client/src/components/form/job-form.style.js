@@ -1,15 +1,15 @@
 import { styled } from '@mui/system';
-import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
-import Typography from '@mui/material/Typography';
 import { Theme } from '../../styles/theme.style';
 
 export const StyledForm = styled(Box, Theme, {
 	name: "FormContainer",
 	slot: "Box"
 }) (() => ({
+	minHeight: "100%",
+	maxWidth: "100%",
 	display: "flex",
-	flexWrap: "row wrap",
+	flexDirection: "column",
 	justifyContent: "space-around",
 	alignItems: "center",
 	padding: "2rem",

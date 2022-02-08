@@ -5,6 +5,20 @@ const uri = process.env.ENV === "production"
   : "http://localhost:8080/api";
 const ApiHeader = axios.create({ baseURL: uri, })
 
+
+export const addUser = async (newUser) => {
+  try {
+    return await ApiHeader.post('/users/create-user', {
+      body: {
+        newUser
+      }   
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
 export const getUserById = async (id) => {
   try {
     const { data } = await ApiHeader.get('/users/get-user-by-id', {
@@ -14,35 +28,6 @@ export const getUserById = async (id) => {
     });
     return data;
 
-  } catch (error) {
-    console.error(error);
-    return error
-  }
-}
-
-export const getJobs = async (userId, jobId) => {
-  try {
-    const { data } = await ApiHeader.get('/users/get-jobs', {
-      query: {
-        userId,
-        jobId: jobId || ""
-      }
-    });
-    return data;
-
-  } catch (error) {
-    console.error(error);
-    return error
-  }
-}
-
-export const addUser = async (newUser) => {
-  try {
-    return await ApiHeader.post('/users/create-user', {
-      body: {
-        newUser
-      }   
-    });
   } catch (error) {
     console.error(error);
     return error
@@ -59,6 +44,22 @@ export const addJob = async (userId, newJob) => {
         newJob
       }
     });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
+
+export const getJobs = async (userId, jobId) => {
+  try {
+    const { data } = await ApiHeader.get('/users/get-jobs', {
+      query: {
+        userId,
+        jobId: jobId || ""
+      }
+    });
+    return data;
+
   } catch (error) {
     console.error(error);
     return error

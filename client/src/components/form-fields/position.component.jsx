@@ -1,5 +1,5 @@
 import React from 'react';
-import { Stack, Typography } from "@mui/material";
+import { Grid, Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 
@@ -17,7 +17,8 @@ function Position({ position, handleChangeForm }) {
 	}
 	
 	return (
-		<Stack
+		<Grid item xs={12} md={6} >
+			<Stack
 				direction="column"
 				justifyContent="center"
 				alignItems="center"
@@ -43,7 +44,7 @@ function Position({ position, handleChangeForm }) {
 						defaultValue={position.description}
 						onChange={({target}) => handleChange(target)}
 						multiline
-          	rows={4}
+						rows={4}
 				/>
 				<DateTimeWidget 
 					name="dateApplied"
@@ -53,6 +54,7 @@ function Position({ position, handleChangeForm }) {
 					date={position.dateApplied} 
 				/>
 			</Stack>
+		</Grid>
 	);
 }
 

@@ -6,7 +6,7 @@ import Company from '../form-fields/company.component';
 import Contact from '../form-fields/contact.component';
 import Interview from '../form-fields/interview.component';
 import MiscFields from '../form-fields/misc-fields.component';
-import { Box } from '@mui/material';
+import { Grid } from '@mui/material';
 import * as UserData from '../../providers/user-data/user-data.context';
 import { handleSubmit } from '../../utils/form-utils'
 import { StyledForm } from './job-form.style';
@@ -35,28 +35,34 @@ function JobForm({ isNew }) {
 			component="form"
 			autoComplete="off"
 		>
-			<Position
-				position={job.position}
-				name="position"
-				handleChangeForm={handleChangeForm}
-			/>
-			<Company
-				company={job.company}
-				handleChangeForm={handleChangeForm}
-			/>
-			<Contact
-				contact={job.contact}
-				handleChangeForm={handleChangeForm}
-			/>
-			<Interview
-				interview={job.interview}
-				handleChangeForm={handleChangeForm}
-			/>
-			<MiscFields
-				followUp={job.followUp}
-				applicationStatus={job.applicationStatus}
-				handleChangeForm={handleChangeForm}
-			/>
+			<Grid 
+				container 
+				rowSpacing={3} 
+				columnSpacing={{ xs: 1, sm: 2, md: 5, lg: 6 }}
+			>
+				<Position
+					position={job.position}
+					name="position"
+					handleChangeForm={handleChangeForm}
+				/>
+				<Contact
+					contact={job.contact}
+					handleChangeForm={handleChangeForm}
+				/>
+				<Company
+					company={job.company}
+					handleChangeForm={handleChangeForm}
+				/>
+				<Interview
+					interview={job.interview}
+					handleChangeForm={handleChangeForm}
+				/>
+				<MiscFields
+					followUp={job.followUp}
+					applicationStatus={job.applicationStatus}
+					handleChangeForm={handleChangeForm}
+				/>
+			</Grid>
 			<Button
 				type="submit"
 				variant="contained"

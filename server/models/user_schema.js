@@ -19,7 +19,8 @@ const user = new mongoose.Schema({
 	applications: [
 		{
 			id: {
-				
+				type: String,
+				required: true
 			},
 			position: {
 				title: {
