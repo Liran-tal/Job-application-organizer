@@ -32,3 +32,8 @@ export const handleSubmit = async (userData, setUserData, job, isNew) => {
 			console.error(error);	
 	}
 };
+
+
+export const handleJobDelete = (target) => {
+	
+}

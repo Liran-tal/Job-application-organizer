@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import Button from '@mui/material/Button';
 import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
 import Position from '../form-fields/position.component';
 import Company from '../form-fields/company.component';
@@ -10,6 +9,7 @@ import { Grid } from '@mui/material';
 import * as UserData from '../../providers/user-data/user-data.context';
 import { handleSubmit } from '../../utils/form-utils'
 import { StyledForm } from './job-form.style';
+import FormButtons from '../form-btns/form-btns.component';
 
 function JobForm({ isNew }) {
 	const [job, setJob] = useState(USER_MOCK_DATA[0]);
@@ -69,12 +69,11 @@ function JobForm({ isNew }) {
 					handleChangeForm={handleChangeForm}
 				/>
 			</Grid>
-			<Button
-				type="submit"
-				variant="contained"
-			>
-				Save
-			</Button>
+			<FormButtons
+				isNew={isNew}
+				isEdit={isEdit}
+				setIsEdit={setIsEdit}
+			/>
 		</StyledForm>
 	);
 }
