@@ -8,8 +8,9 @@ const {
 	getJobsControler,
 	updateJobControler,
 	deleteJobControler,
+	getFullJobData
 
-} = require ("../controllers/users/users_controllers.js");
+} = require("../controllers/users/users_controllers.js");
 
 Router.post("/create-user", createUserControler);
 
@@ -22,5 +23,7 @@ Router.get("/get-jobs", getJobsControler);
 Router.put("/update-job", updateJobControler);
 
 Router.delete("/delete-job", deleteJobControler)
+
+Router.get("/get-job", getFullJobData)
 
 module.exports = Router;

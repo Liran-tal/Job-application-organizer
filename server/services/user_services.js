@@ -1,17 +1,17 @@
-const mongoose  = require("mongoose");
+const mongoose = require("mongoose");
 const User = require("../models/user_schema.js");
 
 const createUserService = async (newUserData) => {
 	console.log("createUserService", newUserData);
 	try {
-		const newUser =  new User(newUserData);
+		const newUser = new User(newUserData);
 		console.log("newUser", newUser);
-		await newUser.save();
-		return newUser;
+		const user = await newUser.save();
+		return user
 	}
 	catch (error) {
 		console.error("Error in createUserService: ", error);
-		throw {status: 400, message: error.message};
+		throw { status: 400, message: error.message };
 	}
 };
 
@@ -25,7 +25,7 @@ const createJobService = async (newUserData) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw {status: 400, message: error.message};
+		throw { status: 400, message: error.message };
 	}
 };
 
@@ -36,7 +36,7 @@ const getUserByIdService = async (id) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw {status: 404, message: error.message};
+		throw { status: 404, message: error.message };
 	}
 };
 
@@ -47,7 +47,7 @@ const getJobsService = async (id) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw {status: 404, message: error.message};
+		throw { status: 404, message: error.message };
 	}
 };
 
@@ -55,7 +55,7 @@ const updateJobService = async (id) => {
 	try {
 		const user = await User.findById(id);
 		if (!user) {
-			return {"error": "User not found"};
+			return { "error": "User not found" };
 		}
 
 		user.isActive = !user.isActive;
@@ -64,7 +64,7 @@ const updateJobService = async (id) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw {status: 404, message: error.message};
+		throw { status: 404, message: error.message };
 	}
 };
 
@@ -72,10 +72,10 @@ const deleteJobService = async (id, newCredit) => {
 	try {
 		const user = await User.findById(id);
 		if (!user) {
-			return {"error": "User not found"};
+			return { "error": "User not found" };
 		}
 		if (!user.isActive) {
-			return {"error": "User is not active. cannot complete action"}
+			return { "error": "User is not active. cannot complete action" }
 		}
 
 		user.credit = newCredit;
@@ -84,7 +84,7 @@ const deleteJobService = async (id, newCredit) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw {status: 404, message: error.message};
+		throw { status: 404, message: error.message };
 	}
 };
 

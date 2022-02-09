@@ -17,13 +17,16 @@ export const StyledTableContainer = styled(TableContainer, Theme, {
 	flexDirection: "column",
 	alignItems: "center",
 	padding: "2rem",
+	width: "100%",
 }));
 
 export const StyledTable = styled(Table, Theme, {
 	name: "Table",
 	slot: "Table"
 }) (() => ({
-	width: "100%"
+	width: "100%",
+	cursor: "pointer",
+	alignSelf: "flex-start"
 }));
 
 export const StyledTHead = styled(TableHead, Theme, {

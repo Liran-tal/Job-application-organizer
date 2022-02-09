@@ -1,10 +1,11 @@
 const validator = require("validator");
+const User = require("../../models/user_schema");
 const Services = require("../../services/user_services");
 
 const createUserControler = async (req, res) => {
 	try {
-		console.log("createUserController: ", req.body);
-		const newUser = await Services.createUserService(req.body);
+		const user = req.body
+		const newUser = await Services.createUserService(user);
 		res.status(200).send(newUser);
 	}
 	catch (error) {
@@ -26,7 +27,7 @@ const getUserByIdControler = async (req, res) => {
 	try {
 		console.log(req.query);
 		if (!req.query.id) {
-			throw {status: 400, message: "Id must contain digits (0-9)"};
+			throw { status: 400, message: "Id must contain digits (0-9)" };
 		}
 		const users = await Services.getUsersService(req.query.id);
 		res.status(200).send(users);
@@ -40,7 +41,7 @@ const getJobsControler = async (req, res) => {
 	try {
 		console.log(req.query);
 		if (!req.query.id) {
-			throw {status: 400, message: "Id must contain digits (0-9)"};
+			throw { status: 400, message: "Id must contain digits (0-9)" };
 		}
 		const users = await Services.getUsersService(req.query.id);
 		res.status(200).send(users);
@@ -76,9 +77,9 @@ const getUsersByCashControler = async (req, res) => {
 const updateJobControler = async (req, res) => {
 	try {
 		if (req.query.id && !isValidId(req.query.id)) {
-			throw {status: 400, message: "Id must contain digits (0-9) only"};
+			throw { status: 400, message: "Id must contain digits (0-9) only" };
 		}
-		
+
 		const users = await Services.toggleUserActiveService(req.query.id);
 		res.status(200).send(users);
 	}
@@ -90,9 +91,9 @@ const updateJobControler = async (req, res) => {
 const deleteJobControler = async (req, res) => {
 	try {
 		if (req.query.id && !isValidId(req.query.id)) {
-			throw {status: 400, message: "Id must contain digits (0-9) only"};
+			throw { status: 400, message: "Id must contain digits (0-9) only" };
 		}
-		
+
 		const users = await Services.toggleUserActiveService(req.query.id);
 		res.status(200).send(users);
 	}
@@ -101,6 +102,16 @@ const deleteJobControler = async (req, res) => {
 	}
 };
 
+const getFullJobData = async (req, res) => {
+	try {
+		const { userId, jobId } = req.params
+		const user = await User.findOneById({ _id: userId });
+		const job = user?.applications.find(app => app._id === jobId)
+		res.status(200).send(job)
+	} catch (err) {
+		res.send(err)
+	}
+}
 
 module.exports = {
 	createUserControler,
@@ -109,4 +120,5 @@ module.exports = {
 	getJobsControler,// TODO: build
 	updateJobControler,// TODO: build
 	deleteJobControler,// TODO: build
+	getFullJobData,
 };

@@ -1,10 +1,8 @@
 import React, { useMemo } from 'react';
 import {
 	useTable,
-	useSortBy,
 	useGlobalFilter,
 	usePagination,
-	useRowSelect
 } from 'react-table';
 import { StyledTableContainer } from './featured-table.style';
 import { COLUMNS } from '../../consts/columns/columns.const';
@@ -26,21 +24,18 @@ function FeaturedTable() {
 		pageOptions,
 		state,
 		setGlobalFilter,
-		selectedFlatRows
 	} = useTable(
 		{
 			columns,
 			data
 		},
 		useGlobalFilter,
-		useSortBy,
 		usePagination,
-		useRowSelect
 	);
 
+	const { globalFilter, pageIndex } = state;
 
 
-	const { globalFilter, pageIndex, selectedRowIds } = state;
 	// TODO: Destructure table to its own component and merge as user-table.page
 	return (
 		<StyledTableContainer>
@@ -50,6 +45,7 @@ function FeaturedTable() {
 			/>
 			<BasicTable 
 				page={page}
+				isUser={true}
 			/>
 			<TableNav
 				previousPage={previousPage}
@@ -59,21 +55,6 @@ function FeaturedTable() {
 				nextPage={nextPage}
 				canNextPage={canNextPage}
 			/>
-
-			<pre>
-				<code>
-					{JSON.stringify(
-						{
-							selectedRowIds: selectedRowIds,
-							'selectedFlatRows[].original': selectedFlatRows.map(
-								d => d.original
-							),
-						},
-						null,
-						2
-					)}
-				</code>
-			</pre>
 		</StyledTableContainer>
 	);
 }
