@@ -3,7 +3,8 @@ const Services = require("../../services/user_services");
 
 const createUserControler = async (req, res) => {
 	try {
-		const newUser = await Services.createUserService(req.body.newUser);
+		console.log("createUserController: ", req.body);
+		const newUser = await Services.createUserService(req.body);
 		res.status(200).send(newUser);
 	}
 	catch (error) {

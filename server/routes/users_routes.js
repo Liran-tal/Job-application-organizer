@@ -13,7 +13,7 @@ const {
 
 Router.post("/create-user", createUserControler);
 
-Router.get("/get-users-by-id", getUserByIdControler);
+Router.get("/get-user-by-id", getUserByIdControler);
 
 Router.post("/create-job", createJobControler);
 

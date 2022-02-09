@@ -1,15 +1,16 @@
-const { Mongoose } = require("mongoose");
+const mongoose  = require("mongoose");
 const User = require("../models/user_schema.js");
 
 const createUserService = async (newUserData) => {
-	const newUser = new User(newUserData);
-	newUser.id = (new Mongoose.Types.ObjectId()).toString();
+	console.log("createUserService", newUserData);
 	try {
+		const newUser =  new User(newUserData);
+		console.log("newUser", newUser);
 		await newUser.save();
 		return newUser;
 	}
 	catch (error) {
-		console.error(error);
+		console.error("Error in createUserService: ", error);
 		throw {status: 400, message: error.message};
 	}
 };
@@ -17,7 +18,7 @@ const createUserService = async (newUserData) => {
 
 const createJobService = async (newUserData) => {
 	const newUser = new User(newUserData);
-	newUser.id = (new Mongoose.Types.ObjectId()).toString();
+	// newUser.id = (new mongoose.Types.ObjectId()).toString();
 	try {
 		await newUser.save();
 		return newUser;

@@ -18,7 +18,7 @@ import { COLUMNS } from '../../consts/columns/columns.const';
 import MOCK_DATA from '../../USER_MOCK_DATA.json'
 
 
-function BasicTable() {
+function BasicTable({ page }) {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => MOCK_DATA, []);
 
@@ -27,7 +27,6 @@ function BasicTable() {
 		getTableBodyProps,
 		prepareRow,
 		headerGroups,
-		page,
 		state,
 		selectedFlatRows
 	} = useTable(

@@ -4,7 +4,7 @@ import { createTheme } from '@mui/material/styles';
 export const Theme = createTheme({
 	palette: {
     primary: {
-      main: teal[600],
+      main: teal[700],
     },
     secondary: {
       main: grey[400],
