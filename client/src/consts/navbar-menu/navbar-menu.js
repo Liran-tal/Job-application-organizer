@@ -6,11 +6,11 @@ export const pages = [
 	}, 
 	{
 		lable: 'My Apllications',
-		value: '/my-applications',
+		value: '/user',
 	}, 
 	{
-		lable: 'Tips & Triks',
-		value: '/tips'
+		lable: 'Tips & Tricks',
+		value: '/tips&tricks'
 	}, 
 ];
 
