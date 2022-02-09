@@ -27,8 +27,6 @@ function BasicTable({ page }) {
 		getTableBodyProps,
 		prepareRow,
 		headerGroups,
-		state,
-		selectedFlatRows
 	} = useTable(
 		{
 			columns,
@@ -39,10 +37,7 @@ function BasicTable({ page }) {
 		useRowSelect,
 	);
 
-
-
-	const { selectedRowIds } = state;
-	// TODO: Destructure table to its own component and merge as user-table.page
+	// TODO: Destructure table to head and body 
 	return (
 		<StyledTableContainer>
 			<StyledTable {...getTableProps()}>
@@ -82,22 +77,6 @@ function BasicTable({ page }) {
 					})}
 				</StyledTBody>
 			</StyledTable>
-			
-
-			<pre>
-				<code>
-					{JSON.stringify(
-						{
-							selectedRowIds: selectedRowIds,
-							'selectedFlatRows[].original': selectedFlatRows.map(
-								d => d.original
-							),
-						},
-						null,
-						2
-					)}
-				</code>
-			</pre>
 		</StyledTableContainer>
 	);
 }
