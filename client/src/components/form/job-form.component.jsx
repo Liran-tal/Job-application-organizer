@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import USER_MOCK_DATA from '../../USER_MOCK_DATA.json'
-import EMPTY_FORM from '../../consts/user-schema/user-schema' 
+import { EMPTY_FORM } from '../../consts/user-schema/user-schema';
 import Position from '../form-fields/position.component';
 import Company from '../form-fields/company.component';
 import Contact from '../form-fields/contact.component';
@@ -12,34 +11,40 @@ import { handleSubmit } from '../../utils/form-utils'
 import { Grid } from '@mui/material';
 import { StyledForm } from './job-form.style';
 
-function JobForm({ isNew }) {
-	const [job, setJob] = useState(USER_MOCK_DATA[0] || EMPTY_FORM);
+
+
+function JobForm({ jobData, isNew, setIsShowForm }) {
+
+	const [job, setJob] = useState(jobData || EMPTY_FORM);
 	const [isEdit, setIsEdit] = useState(isNew);
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 
-	const onSubmit = () => {		
+	const onSubmit = () => {
 		handleSubmit(userData, setUserData, job, isNew);
-	}
+	};	
 
 	const handleChangeForm = (component, componentName) => {
 		setJob({
 			...job,
 			[componentName]: component
 		});
-	}
+	};
 
 	return (
 		<StyledForm
-			onSubmit={onSubmit}
-			component="form"
-			autoComplete="off"
+		onSubmit={onSubmit}
+		component="form"
+		autoComplete="off"
 		>
-			<Grid 
-				container 
-				rowSpacing={3} 
+			<Grid
+				container
+				rowSpacing={3}
 				columnSpacing={{ xs: 1, sm: 2, md: 5, lg: 6 }}
 			>
+				<pre>
+					{JSON.stringify(jobData, null, 2)}
+				</pre>
 				<Position
 					position={job.position}
 					name="position"
@@ -58,7 +63,6 @@ function JobForm({ isNew }) {
 				/>
 				<Interview
 					interview={job.interview}
-					followUp={job.followUp}
 					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
@@ -73,7 +77,8 @@ function JobForm({ isNew }) {
 				isEdit={isEdit}
 				setIsEdit={setIsEdit}
 				onSubmit={onSubmit}
-				// jobId={}
+				setIsShowForm={setIsShowForm}
+			// jobId={}
 			/>
 		</StyledForm>
 	);

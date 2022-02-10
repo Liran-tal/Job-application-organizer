@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
 import {
 	useTable,
 	useGlobalFilter,
@@ -10,10 +10,14 @@ import MOCK_DATA from '../../USER_MOCK_DATA.json'
 import TableGlobalFilter from '../table-global-filter/table-global-filter.component';
 import TableNav from '../table-nav/table-nav.component';
 import BasicTable from '../basic-table/basic-table.component';
+import { Button } from '@mui/material';
+import FormPopup from '../form-popup/form-popup';
 
 function FeaturedTable() {
 	const columns = useMemo(() => COLUMNS, []);
 	const data = useMemo(() => MOCK_DATA, []);
+	const [jobData, setjobData] = useState(null);
+	const [isShowForm, setIsShowForm] = useState(false);
 
 	const {
 		page,
@@ -35,25 +39,37 @@ function FeaturedTable() {
 
 	const { globalFilter, pageIndex } = state;
 
+	const handleRowSelect = (row) => {
+		setjobData(row);
+		setIsShowForm(true);
+	}
 
-	// TODO: Destructure table to its own component and merge as user-table.page
 	return (
 		<StyledTableContainer>
-			<TableGlobalFilter
-				filter={globalFilter}
-				setFilter={setGlobalFilter}
-			/>
-			<BasicTable 
-				page={page}
-				isUser={true}
-			/>
-			<TableNav
-				previousPage={previousPage}
-				canPreviousPage={canPreviousPage}
-				pageIndex={pageIndex}
-				pageOptions={pageOptions}
-				nextPage={nextPage}
-				canNextPage={canNextPage}
+			<div style={{display: isShowForm ? "none" : "block"}} >
+				<TableGlobalFilter
+					filter={globalFilter}
+					setFilter={setGlobalFilter}
+				/>
+				<BasicTable 
+					page={page}
+					handleRowSelect={handleRowSelect}
+				/>
+				<TableNav
+					previousPage={previousPage}
+					canPreviousPage={canPreviousPage}
+					pageIndex={pageIndex}
+					pageOptions={pageOptions}
+					nextPage={nextPage}
+					canNextPage={canNextPage}
+				/>
+				{/* <SetNewJob /> */}
+
+			</div>
+			<FormPopup 
+				jobData={jobData} 
+				isShowForm={isShowForm}
+				setIsShowForm={setIsShowForm}
 			/>
 		</StyledTableContainer>
 	);

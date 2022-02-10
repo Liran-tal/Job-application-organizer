@@ -6,8 +6,8 @@ import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 import { INTERVIEW_FORMATS } from '../../consts/form-fields/form-fields.consts'
 import { FOLLOW_UP_OPS, } from '../../consts/form-fields/form-fields.consts'
 
-function Interview({ followUp, interview, handleChangeForm, isEdit }) {
-
+function Interview({ interview, handleChangeForm, isEdit }) {
+	console.log(interview);
 	const handleChange = (target) => {
 		interview = {
 			...interview,
@@ -58,7 +58,7 @@ function Interview({ followUp, interview, handleChangeForm, isEdit }) {
 					name="followUp"
 					onChange={({target}) => handleChange(target)}
 					label="Follow-Up Format"
-					value={followUp}
+					value={interview.followUp}
 					helperText="Please Select Follow-up Format"
 					variant="standard"
 					InputProps={{

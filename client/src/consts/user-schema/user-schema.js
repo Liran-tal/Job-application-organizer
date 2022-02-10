@@ -1,10 +1,9 @@
-import { format } from "date-fns";
 
 export const EMPTY_FORM = {
 	position: {
 		title: "",
 		description: "",
-		dateApplied: format(new Date(), 'dd/mm/yyyy'), 
+		dateApplied: new Date()
 	},
 	company: {
 		name: "",
@@ -17,7 +16,7 @@ export const EMPTY_FORM = {
 		phone: ""
 	},
 	interview: {
-		date: format(new Date(), 'dd/mm/yyyy'),
+		date: new Date(),
 		format: "Not Set",
 		followUp: "Not Send"
 	},

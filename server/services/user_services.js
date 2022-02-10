@@ -7,7 +7,7 @@ const createUserService = async (newUserData) => {
 		const newUser = new User(newUserData);
 		console.log("newUser", newUser);
 		const user = await newUser.save();
-		return user
+		return user;
 	}
 	catch (error) {
 		console.error("Error in createUserService: ", error);
