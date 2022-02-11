@@ -1,42 +1,49 @@
 import * as Axios from '../api/Axios.Api';
 
 const updateJobsArray = (jobs, update) => {
-	const updateIndex = jobs.findIndex((job) => update.id === job.id);
-	jobs[updateIndex] = update;
-	return jobs
+	const updateIndex = jobs.findIndex((job) => update._id === job._id);
+	// jobs[updateIndex] = update;
+	update 
+		? jobs.splice(updateIndex, 1, update) 
+		: jobs.splice(updateIndex, 1);
+	return jobs;
 }
 
 export const handleSubmit = async (userData, setUserData, job, isNew) => {
 	console.log("userData: ", userData);
 	console.log("job: ", job);
 	console.log("isNew: ", isNew);
-	let res;
 	try {
 		if (isNew) {
-			res = await Axios.addJob(userData.id, job);
+			const addRes = await Axios.addJob(userData.id, job);
+			console.log("addRes: ", addRes);
 			setUserData({
 				...userData,
-				application: [...userData.application, res.data]
+				applications: [...userData.applications, addRes.data]
 			});
 		}
 		else {
-			res = await Axios.updateJob(userData.id, job)
-			const jobs = [...userData.application];				
+			const updateRes = await Axios.updateJob(userData.id, job)
+			console.log("updateRes: ", updateRes);
 			setUserData({
 				...userData,
-				application: updateJobsArray(jobs, res.data)
+				applications: updateJobsArray(userData.applications, updateRes.data)
 			});
 		}
-		console.log(res);
 	} catch (error) {
 			console.error(error);	
 	}
 };
 
-export const handleReturn = (target) => {
-	
-}
 
-export const handleJobDelete = (target) => {
-	
+export const handleJobDelete = async (userData, jobId, setUserData) => {
+	try {
+		await Axios.deleteItem (userData._id, jobId);
+		setUserData({
+			...userData,
+			applications: updateJobsArray(userData.applications)
+		});
+	} catch (error) {
+		console.error(error);	
+	}
 }
