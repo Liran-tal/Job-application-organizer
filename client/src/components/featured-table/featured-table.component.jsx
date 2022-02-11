@@ -12,6 +12,8 @@ import TableNav from '../table-nav/table-nav.component';
 import BasicTable from '../basic-table/basic-table.component';
 import { Button } from '@mui/material';
 import FormPopup from '../form-popup/form-popup';
+import { EMPTY_FORM } from '../../consts/user-schema/user-schema';
+import NewJobButton from '../new-job-btn/new-job-btn.component';
 
 function FeaturedTable() {
 	const columns = useMemo(() => COLUMNS, []);
@@ -44,14 +46,19 @@ function FeaturedTable() {
 		setIsShowForm(true);
 	}
 
+	const handleNewApplication = () => {
+		setjobData(EMPTY_FORM);
+		setIsShowForm(true);
+	}
+
 	return (
 		<StyledTableContainer>
-			<div style={{display: isShowForm ? "none" : "block"}} >
+			<div style={{ display: isShowForm ? "none" : "block" }} >
 				<TableGlobalFilter
 					filter={globalFilter}
 					setFilter={setGlobalFilter}
 				/>
-				<BasicTable 
+				<BasicTable
 					page={page}
 					handleRowSelect={handleRowSelect}
 				/>
@@ -63,11 +70,15 @@ function FeaturedTable() {
 					nextPage={nextPage}
 					canNextPage={canNextPage}
 				/>
-				{/* <SetNewJob /> */}
-
+				<Button
+					variant="contained"
+					onClick={handleNewApplication}
+				>
+					New Application
+				</Button>
 			</div>
-			<FormPopup 
-				jobData={jobData} 
+			<FormPopup
+				jobData={jobData}
 				isShowForm={isShowForm}
 				setIsShowForm={setIsShowForm}
 			/>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { EMPTY_FORM } from '../../consts/user-schema/user-schema';
 import Position from '../form-fields/position.component';
 import Company from '../form-fields/company.component';
@@ -11,66 +11,75 @@ import { handleSubmit } from '../../utils/form-utils'
 import { Grid } from '@mui/material';
 import { StyledForm } from './job-form.style';
 
-
-
 function JobForm({ jobData, isNew, setIsShowForm }) {
-
-	const [job, setJob] = useState(jobData || EMPTY_FORM);
+	
+	const [job, setJob] = useState(EMPTY_FORM);
 	const [isEdit, setIsEdit] = useState(isNew);
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 
 	const onSubmit = () => {
 		handleSubmit(userData, setUserData, job, isNew);
-	};	
-
-	const handleChangeForm = (component, componentName) => {
-		setJob({
-			...job,
-			[componentName]: component
-		});
 	};
 
+	useEffect(() => {
+		if (jobData) setJob(jobData)
+	}, [jobData])
+
+	const handleChangeForm = (component, componentName) => {
+		setJob({...job, [componentName]: component});
+	};
+
+
+
 	return (
+		<>
 		<StyledForm
-		onSubmit={onSubmit}
-		component="form"
-		autoComplete="off"
+			onSubmit={onSubmit}
+			component="form"
+			autoComplete="off"
 		>
 			<Grid
 				container
 				rowSpacing={3}
 				columnSpacing={{ xs: 1, sm: 2, md: 5, lg: 6 }}
 			>
-				<pre>
-					{JSON.stringify(jobData, null, 2)}
-				</pre>
+				{/* {job.position.title &&  */}
 				<Position
 					position={job.position}
 					name="position"
 					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
-				/>
+					/>
+				{/* }
+				{job.position.title &&  */}
 				<Contact
 					contact={job.contact}
 					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
-				/>
+					/>
+				{/* }
+				{job.position.title &&  */}
 				<Company
 					company={job.company}
 					handleChangeForm={handleChangeForm}
 					isEdit={isEdit}
 				/>
-				<Interview
-					interview={job.interview}
-					isEdit={isEdit}
-					handleChangeForm={handleChangeForm}
-				/>
+				{/* }
+				{job.position.title && */}
+					<Interview
+						interview={job.interview}
+						isEdit={isEdit}
+						handleChangeForm={handleChangeForm}
+						/>
+				{/* }
+				{job.position.title &&  */}
 				<MiscFields
 					applicationStatus={job.applicationStatus}
 					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
-				/>
+					/>
+				{/* } */}
 			</Grid>
 			<FormButtons
 				isNew={isNew}
@@ -78,9 +87,13 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 				setIsEdit={setIsEdit}
 				onSubmit={onSubmit}
 				setIsShowForm={setIsShowForm}
-			// jobId={}
-			/>
+				// jobId={job._id}
+				/>
 		</StyledForm>
+		<pre>
+			{JSON.stringify(job, null, 2)}
+		</pre>
+		</>
 	);
 }
 

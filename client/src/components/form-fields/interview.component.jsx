@@ -7,7 +7,6 @@ import { INTERVIEW_FORMATS } from '../../consts/form-fields/form-fields.consts'
 import { FOLLOW_UP_OPS, } from '../../consts/form-fields/form-fields.consts'
 
 function Interview({ interview, handleChangeForm, isEdit }) {
-	console.log(interview);
 	const handleChange = (target) => {
 		interview = {
 			...interview,

@@ -29,7 +29,7 @@ function HomePage() {
 	return (
 		<Box
 			sx={{
-				height: "100%",
+				height: "80%",
 				display: "flex",
 				flexDirection: "column",
 				justifyContent: "center",

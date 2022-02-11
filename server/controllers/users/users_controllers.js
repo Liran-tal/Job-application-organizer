@@ -14,9 +14,32 @@ const createUserControler = async (req, res) => {
 };
 
 const createJobControler = async (req, res) => {
+	if (!req.query.userId) {
+		throw { status: 400, message: "Id must contain digits (0-9)" };
+	}
+	const userId = req.query.userId;
+	const newJob = req.body.newJob;
+
 	try {
-		const newUser = await Services.createUserService(req.body.newUser);
-		res.status(200).send(newUser);
+		const user = await Services.createJobService(userId, newJob);
+		res.status(200).send(user);
+	}
+	catch (error) {
+		res.status(error.status).send(error.message);
+	}
+};
+
+const createManyJobsControler = async (req, res) => {
+	if (!req.query.userId) {
+		throw { status: 400, message: "Id must contain digits (0-9)" };
+	}
+	const userId = req.query.userId;
+	const newJobs = req.body;
+	console.log(`\nreq.body:\n`, req.body);
+
+	try {
+		const user = await Services.createManyJobsService(userId, newJobs);
+		res.status(200).send(user);
 	}
 	catch (error) {
 		res.status(error.status).send(error.message);
@@ -25,11 +48,10 @@ const createJobControler = async (req, res) => {
 
 const getUserByIdControler = async (req, res) => {
 	try {
-		console.log(req.query);
 		if (!req.query.id) {
 			throw { status: 400, message: "Id must contain digits (0-9)" };
 		}
-		const users = await Services.getUsersService(req.query.id);
+		const users = await Services.getUserByIdService(req.query.id);
 		res.status(200).send(users);
 	}
 	catch (error) {
@@ -39,11 +61,10 @@ const getUserByIdControler = async (req, res) => {
 
 const getJobsControler = async (req, res) => {
 	try {
-		console.log(req.query);
-		if (!req.query.id) {
+		if (!req.query.userId) {
 			throw { status: 400, message: "Id must contain digits (0-9)" };
 		}
-		const users = await Services.getUsersService(req.query.id);
+		const users = await Services.getJobsService(req.query.userId);
 		res.status(200).send(users);
 	}
 	catch (error) {
@@ -51,36 +72,17 @@ const getJobsControler = async (req, res) => {
 	}
 };
 
-
-const getActiveUsersControler = async (req, res) => {
-	try {
-		const users = await Services.getActiveUsersService();
-		res.status(200).send(users);
-	}
-	catch (error) {
-		res.status(error.status).send(error.message);
-	}
-};
-
-const getUsersByCashControler = async (req, res) => {
-	const min = setRangeNum(req.query.cashMin, "min");
-	const max = setRangeNum(req.query.cashMax, "max");
-	try {
-		const users = await Services.getUsersByCashService(min, max);
-		res.status(200).send(users);
-	}
-	catch (error) {
-		res.status(error.status).send(error.message);
-	}
-};
 
 const updateJobControler = async (req, res) => {
 	try {
-		if (req.query.id && !isValidId(req.query.id)) {
-			throw { status: 400, message: "Id must contain digits (0-9) only" };
+		if (!req.query.userId) {
+			throw { status: 400, message: "Id must contain digits (0-9)" };
 		}
-
-		const users = await Services.toggleUserActiveService(req.query.id);
+		const userId = req.query.userId;
+		const job = req.body.jobData;
+		// console.log(job);
+	
+		const users = await Services.updateJobService(userId, job);
 		res.status(200).send(users);
 	}
 	catch (error) {
@@ -115,10 +117,11 @@ const getFullJobData = async (req, res) => {
 
 module.exports = {
 	createUserControler,
+	createJobControler, 
+	createManyJobsControler,
 	getUserByIdControler,
-	createJobControler, // TODO: build
-	getJobsControler,// TODO: build
-	updateJobControler,// TODO: build
-	deleteJobControler,// TODO: build
+	getJobsControler,
+	updateJobControler,
+	deleteJobControler,
 	getFullJobData,
 };

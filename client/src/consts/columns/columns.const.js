@@ -14,20 +14,12 @@ export const COLUMNS = [
 		accessor: 'company.name'
 	},
 	{
-		Header: 'Company Location',
-		accessor: 'company.location'
-	},
-	{
 		Header: 'Contact Name',
 		accessor: 'contact.name'
 	},
 	{
 		Header: 'Contact Email Address',
 		accessor: 'contact.email'
-	},
-	{
-		Header: 'Contact Phone Number',
-		accessor: 'contact.phone'
 	},
 	{
 		Header: 'Next Interview Date',

@@ -33,6 +33,9 @@ export const handleSubmit = async (userData, setUserData, job, isNew) => {
 	}
 };
 
+export const handleReturn = (target) => {
+	
+}
 
 export const handleJobDelete = (target) => {
 	

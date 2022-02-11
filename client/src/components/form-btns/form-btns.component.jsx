@@ -1,22 +1,28 @@
 import React from 'react';
-import { useNavigate } from 'react-router-dom';
 import { Button, Container } from '@mui/material';
 import { Theme } from '../../styles/theme.style';
 import { handleJobDelete } from '../../utils/form-utils';
 
 function FormButtons({ isNew, isEdit, setIsEdit, onSubmit, setIsShowForm }) {
-	// let navigate = useNavigate();
 	console.log(isEdit, isNew);
 
 	const onClickSave = () => {
 		if (isEdit) {
 			onSubmit();
 		}  
-		setIsEdit(false);
+		setIsEdit(true);
 	}
 
 	return (
-		<Container>
+		<Container
+			sx={{
+				margin: "4rem auto 0",
+				width: "40%",
+				display: "flex",
+				justifyContent: "space-around",
+				alignItems: "center"
+			}}
+		>
 			<Button
 				name="delete"
 				value={isNew}

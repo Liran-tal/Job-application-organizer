@@ -30,7 +30,7 @@ function Contact({ contact, handleChangeForm, isEdit }) {
 						onChange={({target}) => handleChange(target)}
 						required
 						label="Name"
-						defaultValue={contact.name}
+						value={contact.name}
 						variant="standard"
 						InputProps={{
 							readOnly: !isEdit,
@@ -42,7 +42,7 @@ function Contact({ contact, handleChangeForm, isEdit }) {
 						name="position"
 						onChange={({target}) => handleChange(target)}
 						label="Position"
-						defaultValue={contact.position}
+						value={contact.position}
 						variant="standard"
 						InputProps={{
 							readOnly: !isEdit,
@@ -54,7 +54,7 @@ function Contact({ contact, handleChangeForm, isEdit }) {
 						onChange={({target}) => handleChange(target)}
 						required
 						label="Email Address"
-						defaultValue={contact.email}
+						value={contact.email}
 						variant="standard"
 						InputProps={{
 							readOnly: !isEdit,
@@ -65,7 +65,7 @@ function Contact({ contact, handleChangeForm, isEdit }) {
 						name="phone"
 						onChange={({target}) => handleChange(target)}
 						label="Phone Number"
-						defaultValue={contact.phone}
+						value={contact.phone}
 						variant="standard"
 						helperText="Enter In Format: xxx-xxx-xxxx"
 						InputProps={{

@@ -32,7 +32,6 @@ const NavBar = () => {
 	};
 
 	const handleCloseNavMenu = ({ target }) => {
-		console.log(target.value);
 		setAnchorElNav(null);
 		navigate(`${target.value}`)
 	};
@@ -49,7 +48,7 @@ const NavBar = () => {
 	};
 
 	return (
-		<AppBar position="static">
+		<AppBar position="static" sx={{width: "100%"}}>
 			<Container maxWidth="xl" sx={{ backgroundColor: Theme.palette.primary.dark }}>
 				<Toolbar disableGutters>
 					<Typography

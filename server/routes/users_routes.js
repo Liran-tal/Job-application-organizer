@@ -3,8 +3,9 @@ const Router = express.Router();
 
 const {
 	createUserControler,
-	getUserByIdControler,
 	createJobControler,
+	createManyJobsControler,
+	getUserByIdControler,
 	getJobsControler,
 	updateJobControler,
 	deleteJobControler,
@@ -14,16 +15,16 @@ const {
 
 Router.post("/create-user", createUserControler);
 
-Router.get("/get-user-by-id", getUserByIdControler);
-
 Router.post("/create-job", createJobControler);
+
+Router.post("/create-many-jobs", createManyJobsControler);
+
+Router.get("/get-user-by-id", getUserByIdControler);
 
 Router.get("/get-jobs", getJobsControler);
 
 Router.put("/update-job", updateJobControler);
 
 Router.delete("/delete-job", deleteJobControler)
-
-Router.get("/get-job", getFullJobData)
 
 module.exports = Router;

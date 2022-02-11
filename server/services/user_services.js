@@ -1,11 +1,10 @@
 const mongoose = require("mongoose");
 const User = require("../models/user_schema.js");
+const utils = require('../utils/utils')
 
 const createUserService = async (newUserData) => {
-	console.log("createUserService", newUserData);
 	try {
 		const newUser = new User(newUserData);
-		console.log("newUser", newUser);
 		const user = await newUser.save();
 		return user;
 	}
@@ -16,12 +15,35 @@ const createUserService = async (newUserData) => {
 };
 
 
-const createJobService = async (newUserData) => {
-	const newUser = new User(newUserData);
-	// newUser.id = (new mongoose.Types.ObjectId()).toString();
+const createJobService = async (userId, newJob) => {
 	try {
-		await newUser.save();
-		return newUser;
+		const user = await User.findById(userId);
+		if (!user) {
+			throw { status: 404, message: error.message };
+		}
+
+		user.applications.push(newJob);
+		await user.save();
+		return user;
+	}
+	catch (error) {
+		console.error(error);
+		throw { status: 400, message: error.message };
+	}
+};
+
+
+const createManyJobsService = async (userId, newJobs) => {
+	try {
+		const user = await User.findById(userId);
+		if (!user) {
+			throw { status: 404, message: error.message };
+		}
+		newJobs.forEach((job) => {
+			user.applications.push(job);
+		});
+		await user.save();
+		return user;
 	}
 	catch (error) {
 		console.error(error);
@@ -31,40 +53,62 @@ const createJobService = async (newUserData) => {
 
 const getUserByIdService = async (id) => {
 	try {
-		const users = await User.findById(id);
-		return users || [];
-	}
-	catch (error) {
-		console.error(error);
-		throw { status: 404, message: error.message };
-	}
-};
-
-const getJobsService = async (id) => {
-	try {
-		const users = await User.findById(id);
-		return users || [];
-	}
-	catch (error) {
-		console.error(error);
-		throw { status: 404, message: error.message };
-	}
-};
-
-const updateJobService = async (id) => {
-	try {
 		const user = await User.findById(id);
-		if (!user) {
-			return { "error": "User not found" };
-		}
-
-		user.isActive = !user.isActive;
-		await user.save();
-		return user;
+		return user || [];
 	}
 	catch (error) {
 		console.error(error);
-		throw { status: 404, message: error.message };
+		throw { status: 500, message: error.message };
+	}
+};
+
+const getJobsService = async (userId) => {
+	try {
+		const user = await User.findById(userId);
+		if (!user) {
+			throw { status: 404, message: error.message };
+		}
+		return user.applications;
+	}
+	catch (error) {
+		console.error(error);
+		throw { status: 500, message: error.message };
+	}
+};
+
+const updateJobService = async (userId, job) => {
+	try {
+		const user = await User.findById(userId);
+		if (!user) {
+			throw { status: 404, message: error.message };
+		}
+		// const edit = async (pasportId, 
+		// 	userDto) => {
+		// 	const userToEdit = await User.findOneAndUpdate(
+		// 		{ pasportId: pasportId },
+		// 		userDto,
+		// 		{ new: true }
+		// 	);
+		// 	if (!userToEdit) {
+		// 		throw new Error(`The user with id ${id} is not found`);
+		// 	}
+		// 	return userToEdit;
+		// };
+		
+		// console.log(`\nUser before change dB: \n`, user.applications);
+		// user.applications = utils.updateJobsArray(user.applications, job);
+		return await User.findOneAndUpdate(
+			{"_id": userId, "applications._id": job._id},
+			{$set: {"applications.$": job}},
+			{ new: true }
+		)
+		// await user.save();
+		// console.log(`\nUser After save to dB: \n`, user.applications);
+		return user.applications;
+	}
+	catch (error) {
+		console.error(error);
+		throw { status: 500, message: error.message };
 	}
 };
 
@@ -93,9 +137,10 @@ const deleteJobService = async (id, newCredit) => {
 
 module.exports = {
 	createUserService,
+	createJobService, 
+	createManyJobsService,
 	getUserByIdService,
-	createJobService, // TODO: build
-	getJobsService,// TODO: build
-	updateJobService,// TODO: build
-	deleteJobService,// TODO: build
+	getJobsService,
+	updateJobService,
+	deleteJobService,
 };

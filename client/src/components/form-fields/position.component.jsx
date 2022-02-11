@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Grid, Stack, Typography } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 
 function Position({ position, handleChangeForm, isEdit }) {
-
+	// const [title, setTitle] = useState(position.title || "")
+	// console.log(position.title)
 	const handleChange = (target) => {
 		position = {
 			...position,
@@ -12,7 +13,8 @@ function Position({ position, handleChangeForm, isEdit }) {
 		}
 		handleChangeForm(position, "position");
 	}
-	
+
+
 	return (
 		<Grid item xs={12} md={6} >
 			<Stack
@@ -25,36 +27,36 @@ function Position({ position, handleChangeForm, isEdit }) {
 					Position:
 				</Typography>
 				<TextField
-						name='title'
-						type="text"
-						required
-						label="Title"
-						defaultValue={position.title}
-						variant="standard"
-						onChange={({target}) => handleChange(target)}
-						InputProps={{
-							readOnly: !isEdit,
-						}}
-						// helperText="Position Title is requiered"
+					name='title'
+					type="text"
+					required
+					label="Title"
+					value={position.title}
+					variant="standard"
+					onChange={({ target }) => handleChange(target)}
+					// InputProps={{
+					// 	readOnly: !isEdit,
+					// }}
+					helperText="Position Title is requiered"
 				/>
 				<TextField
-						name="description"
-						type="text"
-						label="Description"
-						defaultValue={position.description}
-						onChange={({target}) => handleChange(target)}
-						multiline
-						rows={4}
-						InputProps={{
-							readOnly: !isEdit,
-						}}
+					name="description"
+					type="text"
+					label="Description"
+					value={position.description}
+					onChange={({ target }) => handleChange(target)}
+					multiline
+					rows={4}
+					InputProps={{
+						readOnly: !isEdit,
+					}}
 				/>
-				<DateTimeWidget 
+				<DateTimeWidget
 					name="dateApplied"
 					handleChange={handleChange}
-					required 
+					required
 					label={"Date Applied"}
-					date={position.dateApplied} 
+					date={position.dateApplied}
 					isEdit={isEdit}
 				/>
 			</Stack>

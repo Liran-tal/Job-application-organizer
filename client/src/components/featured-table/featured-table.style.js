@@ -24,9 +24,10 @@ export const StyledTable = styled(Table, Theme, {
 	name: "Table",
 	slot: "Table"
 }) (() => ({
-	width: "100%",
+	minWidth: "100%",
 	cursor: "pointer",
-	alignSelf: "flex-start"
+	alignSelf: "flex-start",
+	overflowX: "auto"
 }));
 
 export const StyledTHead = styled(TableHead, Theme, {

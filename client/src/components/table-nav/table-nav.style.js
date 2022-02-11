@@ -9,6 +9,7 @@ export const TableNavWrapper = styled(Box, Theme, {
 	slot: "Box"
 }) (() => ({
 	width: "40%",
+  margin: "auto",
 	display: "flex",
 	justifyContent: "space-around",
 	alignItems: "center",

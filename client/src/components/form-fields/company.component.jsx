@@ -29,7 +29,7 @@ function Company({ company, handleChangeForm, isEdit }) {
 						onChange={({target}) => handleChange(target)}
 						required
 						label="Name"
-						defaultValue={company.name}
+						value={company.name}
 						variant="standard"
 						InputProps={{
 							readOnly: !isEdit,
@@ -41,7 +41,7 @@ function Company({ company, handleChangeForm, isEdit }) {
 						name="location"
 						onChange={({target}) => handleChange(target)}
 						label="Location"
-						defaultValue={company.location}
+						value={company.location}
 						variant="standard"
 						InputProps={{
 							readOnly: !isEdit,
