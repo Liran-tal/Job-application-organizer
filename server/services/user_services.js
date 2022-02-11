@@ -24,7 +24,7 @@ const createJobService = async (userId, newJob) => {
 
 		user.applications.push(newJob);
 		await user.save();
-		return user;
+		return user.applications;
 	}
 	catch (error) {
 		console.error(error);
@@ -78,10 +78,10 @@ const getJobsService = async (userId) => {
 
 const updateJobService = async (userId, job) => {
 	try {
-		const user = await User.findById(userId);
-		if (!user) {
-			throw { status: 404, message: error.message };
-		}
+		// const user = await User.findById(userId);
+		// if (!user) {
+		// 	throw { status: 404, message: error.message };
+		// }
 		// const edit = async (pasportId, 
 		// 	userDto) => {
 		// 	const userToEdit = await User.findOneAndUpdate(
@@ -94,17 +94,17 @@ const updateJobService = async (userId, job) => {
 		// 	}
 		// 	return userToEdit;
 		// };
-		
+
 		// console.log(`\nUser before change dB: \n`, user.applications);
 		// user.applications = utils.updateJobsArray(user.applications, job);
-		return await User.findOneAndUpdate(
-			{"_id": userId, "applications._id": job._id},
-			{$set: {"applications.$": job}},
+		await User.findOneAndUpdate(
+			{ "_id": userId, "applications._id": job._id },
+			{ $set: { "applications.$": job } },
 			{ new: true }
 		)
 		// await user.save();
 		// console.log(`\nUser After save to dB: \n`, user.applications);
-		return user.applications;
+		return User.applications;
 	}
 	catch (error) {
 		console.error(error);
@@ -112,22 +112,16 @@ const updateJobService = async (userId, job) => {
 	}
 };
 
-const deleteJobService = async (id, newCredit) => {
+const deleteJobService = async (userId, jobId) => {
 	try {
-		const user = await User.findById(id);
-		if (!user) {
-			return { "error": "User not found" };
-		}
-		if (!user.isActive) {
-			return { "error": "User is not active. cannot complete action" }
-		}
+		await User.findOneAndUpdate(
+			{ "_id": userId, "applications._id": jobId },
+			{ $pull: { "applications": { "_id": jobId } } },
+			{ safe: true, multi: true },
+		)
 
-		user.credit = newCredit;
-		await user.save();
-		return user;
-	}
-	catch (error) {
-		console.error(error);
+		return { success: true, message: `objId: ${jobId} deleted` };
+	} catch (error) {
 		throw { status: 404, message: error.message };
 	}
 };
@@ -137,7 +131,7 @@ const deleteJobService = async (id, newCredit) => {
 
 module.exports = {
 	createUserService,
-	createJobService, 
+	createJobService,
 	createManyJobsService,
 	getUserByIdService,
 	getJobsService,
