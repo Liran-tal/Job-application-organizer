@@ -50,12 +50,11 @@ export const addJob = async (userId, newJob) => {
   }
 }
 
-export const getJobs = async (userId, jobId) => {
+export const getJobs = async (userId) => {
   try {
     const { data } = await ApiHeader.get('/users/get-jobs', {
       query: {
-        userId,
-        jobId: jobId || ""
+        userId
       }
     });
     return data;

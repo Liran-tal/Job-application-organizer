@@ -12,7 +12,11 @@ function FormPopup({ jobData, isShowForm, setIsShowForm }) {
 				zIndex: isShowForm ? 1000 : -1
 			}}
 		>
-			<JobForm jobData={jobData} setIsShowForm={setIsShowForm}/>
+			<JobForm 
+				jobData={jobData} 
+				setIsShowForm={setIsShowForm}
+				isNew={jobData._id ? false : true}
+			/>
 		</Box>
 	)
 }
