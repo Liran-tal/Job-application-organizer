@@ -35,6 +35,7 @@ export const StyledTHead = styled(TableHead, Theme, {
 	slot: "TableHead"
 }) (() => ({
 	width: "100%",
+	padding: "0 1rem"
 }));
 
 export const StyledTBody = styled(TableBody, Theme, {
@@ -70,7 +71,6 @@ export const StyledTHeadRow = styled(TableRow, Theme, {
 	backgroundColor: Theme.palette.primary.dark,
 	color: "white",
 	"th": {
-		paddingTop: "1rem",
-		paddingBottom: "1rem",
+		padding: "1rem",
 	} 
 }));

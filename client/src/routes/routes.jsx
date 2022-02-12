@@ -7,9 +7,9 @@ import User from '../pages/user.page';
 function AppRoutes() {
 	return (
 		<Routes>
-			<Route path="/" element={<HomePage />} />
 			<Route path="/user" element={<User />} />
 			<Route path="/tips&tricks" element={<TipsPage />} />
+			<Route path="/" element={<HomePage />} />
 		</Routes>
 	);
 }

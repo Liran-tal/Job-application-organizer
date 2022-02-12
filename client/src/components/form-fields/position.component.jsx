@@ -34,9 +34,9 @@ function Position({ position, handleChangeForm, isEdit }) {
 					value={position.title}
 					variant="standard"
 					onChange={({ target }) => handleChange(target)}
-					// InputProps={{
-					// 	readOnly: !isEdit,
-					// }}
+					InputProps={{
+						readOnly: !isEdit,
+					}}
 					helperText="Position Title is requiered"
 				/>
 				<TextField

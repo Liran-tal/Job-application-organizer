@@ -97,14 +97,15 @@ const updateJobService = async (userId, job) => {
 
 		// console.log(`\nUser before change dB: \n`, user.applications);
 		// user.applications = utils.updateJobsArray(user.applications, job);
-		await User.findOneAndUpdate(
+		const updatedJob = await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": job._id },
 			{ $set: { "applications.$": job } },
 			{ new: true }
 		)
-		// await user.save();
-		// console.log(`\nUser After save to dB: \n`, user.applications);
-		return User.applications;
+		// await User.save();
+		console.log(`\nUser After save to dB: \n`, updatedJob);
+		// return User.applications;
+		return updatedJob;
 	}
 	catch (error) {
 		console.error(error);

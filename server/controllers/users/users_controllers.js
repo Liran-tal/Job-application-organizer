@@ -80,6 +80,8 @@ const updateJobControler = async (req, res) => {
 		const userId = req.query.userId;
 		const job = req.body.jobData;
 	
+		console.log("userId: ", userId);
+		console.log("job: ", job);
 		const updatedJob = await Services.updateJobService(userId, job);
 		res.status(200).send(updatedJob);
 	}

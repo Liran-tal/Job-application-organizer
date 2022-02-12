@@ -22,6 +22,10 @@ export const COLUMNS = [
 		accessor: 'contact.email'
 	},
 	{
+		Header: 'Follow-Up Format',
+		accessor: 'followUp'
+	},
+	{
 		Header: 'Next Interview Date',
 		accessor: 'interview.date',
 		Cell: ({ value }) => {
@@ -34,10 +38,6 @@ export const COLUMNS = [
 	{
 		Header: 'Next Interview Format',
 		accessor: 'interview.format',
-	},
-	{
-		Header: 'Follow-Up Format',
-		accessor: 'followUp'
 	},
 	{
 		Header: 'Status',
