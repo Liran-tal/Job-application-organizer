@@ -12,19 +12,20 @@ function LoginPage() {
 	const [errorMessage, setErrorMessage] = useState(null);
 	let navigate = useNavigate()
 
-	const submitLogin = (email, password) => {
+	const submitLogin = async (email, password) => {
 		try {
-			const user = axios.loginUser(email, password);
-			setUserData(user);
+			const {data} = await axios.loginUser(email, password);
+			console.log(data);
+			setUserData(data);
 			navigate('/');
 		} catch (error) {
 			setErrorMessage(errorMessage);
 		}
 	};
 
-	const submitCreateUser = (userName, email, password) => {
+	const submitCreateUser = async (userName, email, password) => {
 		try {
-			const user = axios.addUser({
+			const user = await axios.addUser({
 				name: userName,
 				email: email,
 				password: password,
@@ -42,9 +43,11 @@ function LoginPage() {
 		<Box
 			sx={{
 				height: "80%",
+				width: "40%",
+				margin: "auto",
 				display: "flex",
 				flexWrap: "wrap",
-				justifyContent: "center",
+				justifyContent: "space-between",
 				alignItems: "flex-start",
 				padding: "2rem"
 			}}

@@ -5,7 +5,6 @@ import FeaturedTable from '../components/featured-table/featured-table.component
 import FormPopup from '../components/form-popup/form-popup';
 import * as UserData from '../providers/user-data/user-data.context';
 import { EMPTY_FORM } from '../consts/user-schema/user-schema';
-import MOCK_DATA from '../USER_MOCK_DATA.json';
 
 function UserPage() {
 	const userData = UserData.useUserContext()
@@ -47,7 +46,7 @@ function UserPage() {
 		>
 			<Box style={{ display: isShowForm ? "none" : "block" }} >
 				<FeaturedTable
-					jobsData={jobsForTable || MOCK_DATA}
+					jobsData={jobsForTable}
 					handleRowSelect={handleRowSelect}
 				/>
 				<Button

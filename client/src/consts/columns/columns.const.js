@@ -23,7 +23,7 @@ export const COLUMNS = [
 	},
 	{
 		Header: 'Follow-Up Format',
-		accessor: 'followUp'
+		accessor: 'interview.followUp'
 	},
 	{
 		Header: 'Next Interview Date',
