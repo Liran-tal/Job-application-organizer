@@ -15,7 +15,7 @@ export const addUser = async (newUser) => {
     });
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
@@ -30,7 +30,7 @@ export const getUserById = async (id) => {
 
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
@@ -46,7 +46,7 @@ export const addJob = async (userId, newJob) => {
     });
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
@@ -61,7 +61,7 @@ export const getJobs = async (userId) => {
 
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
@@ -77,13 +77,13 @@ export const updateJob = async (userId, jobId) => {
     });
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
 export const deleteItem = async (userId, jobId) => {
   try {
-    return await ApiHeader.put('/users/delete-job', {
+    return await ApiHeader.delete('/users/delete-job', {
       query: {
         userId
       },   
@@ -93,21 +93,21 @@ export const deleteItem = async (userId, jobId) => {
     });
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }
 
 
 export const loginUser = async (email, password) => {
   try {
-    return await ApiHeader.post('/users/create-job', {
-      body: {
+    return await ApiHeader.get('/sign-in/verify-user', {
+      params: {
         email,
         password
       }
     });
   } catch (error) {
     console.error(error);
-    return error
+    throw error
   }
 }

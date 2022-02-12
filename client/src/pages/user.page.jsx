@@ -16,22 +16,13 @@ function UserPage() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
-		// const fetchUserJobs = async () => {
-		// 	try {
-		// 		const { data } = axios.getJobs()
-		// 	} catch (error) {
-		// 		console.error(error);
-		// 	}
-		// }
-
 		if (userData) {
-			// fetchUserJobs();
 			setJobsForTable(userData.applications);
 		}
 		else {
 			navigate('/');
 		}
-	}, [userData, navigate])
+	}, [userData, navigate]);
 	
 	const handleRowSelect = (row) => {
 		setJobData(row);

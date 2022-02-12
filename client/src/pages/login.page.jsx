@@ -4,16 +4,19 @@ import * as axios from '../api/Axios.Api'
 import * as UserData from '../providers/user-data/user-data.context';
 import CreateNewUser from '../components/login-create-new/create-new-user.component'
 import LoginComponent from '../components/login-create-new/login.component'
+import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
 	// const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 	const [errorMessage, setErrorMessage] = useState(null);
+	let navigate = useNavigate()
 
 	const submitLogin = (email, password) => {
 		try {
 			const user = axios.loginUser(email, password);
 			setUserData(user);
+			navigate('/');
 		} catch (error) {
 			setErrorMessage(errorMessage);
 		}
@@ -28,6 +31,7 @@ function LoginPage() {
 				applications: [],
 			});
 			setUserData(user);
+			navigate('/');
 		} catch (error) {
 			setErrorMessage(errorMessage);
 		}
@@ -39,7 +43,6 @@ function LoginPage() {
 			sx={{
 				height: "80%",
 				display: "flex",
-				// flexDirection: "column",
 				flexWrap: "wrap",
 				justifyContent: "center",
 				alignItems: "flex-start",

@@ -12,7 +12,7 @@ export const useSetUserContext = () => {
 };
 
 export const UserProvider = ({ children }) => {
-  const [userData, setUserData] = useState([]);
+  const [userData, setUserData] = useState(null);
 
   return (
     <GetUserContext.Provider value={userData}>

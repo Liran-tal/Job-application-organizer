@@ -16,13 +16,12 @@ import { pages } from '../../consts/navbar-menu/navbar-menu'
 import * as UserData from '../../providers/user-data/user-data.context';
 import { Theme } from '../../styles/theme.style';
 
-
 const NavBar = () => {
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	let navigate = useNavigate();
+	let navigate = useNavigate();	
 
 	const handleOpenNavMenu = ({ currentTarget }) => {
 		setAnchorElNav(currentTarget);
@@ -38,6 +37,9 @@ const NavBar = () => {
 
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
+	};
+	
+	const handleUserLog = () => {
 		if (!userData) {
 			navigate('/login');
 		}
@@ -48,7 +50,7 @@ const NavBar = () => {
 	};
 
 	return (
-		<AppBar position="static" sx={{width: "100%"}}>
+		<AppBar position="static" sx={{ width: "100%" }}>
 			<Container maxWidth="xl" sx={{ backgroundColor: Theme.palette.primary.dark }}>
 				<Toolbar disableGutters>
 					<Typography
@@ -130,7 +132,10 @@ const NavBar = () => {
 					<Box sx={{ flexGrow: 0 }}>
 						<Tooltip title="Open settings">
 							<IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-								<Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+								<Avatar
+									alt={userData ? userData.name : "Login"}
+									src="/static/images/avatar/2.jpg"
+								/>
 							</IconButton>
 						</Tooltip>
 						<Menu
@@ -149,7 +154,7 @@ const NavBar = () => {
 							open={Boolean(anchorElUser)}
 							onClose={handleCloseUserMenu}
 						>
-							<MenuItem onClick={handleCloseUserMenu}>
+							<MenuItem onClick={handleUserLog}>
 								<Typography textAlign="center">
 									{userData ? "logout" : "Login"}
 								</Typography>
