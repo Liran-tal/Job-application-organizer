@@ -1,51 +1,54 @@
-import { Box, Stack, TextField, Typography } from '@mui/material'
+import { Box } from '@mui/material'
 import React, { useState } from 'react'
+import * as axios from '../api/Axios.Api'
+import * as UserData from '../providers/user-data/user-data.context';
+import CreateNewUser from '../components/login-create-new/create-new-user.component'
+import LoginComponent from '../components/login-create-new/login.component'
 
 function LoginPage() {
-	const [email, setEmail] = useState('');
-	const [password, setPassword] = useState('');
+	// const userData = UserData.useUserContext()
+	const setUserData = UserData.useSetUserContext();
+	const [errorMessage, setErrorMessage] = useState(null);
 
-	
+	const submitLogin = (email, password) => {
+		try {
+			const user = axios.loginUser(email, password);
+			setUserData(user);
+		} catch (error) {
+			setErrorMessage(errorMessage);
+		}
+	};
+
+	const submitCreateUser = (userName, email, password) => {
+		try {
+			const user = axios.addUser({
+				name: userName,
+				email: email,
+				password: password,
+				applications: [],
+			});
+			setUserData(user);
+		} catch (error) {
+			setErrorMessage(errorMessage);
+		}
+	};
+
 
 	return (
 		<Box
 			sx={{
 				height: "80%",
 				display: "flex",
-				flexDirection: "column",
+				// flexDirection: "column",
+				flexWrap: "wrap",
 				justifyContent: "center",
-				alignItems: "center",
-				paddingTop: "2rem"
+				alignItems: "flex-start",
+				padding: "2rem"
 			}}
 		>
-			<Stack
-				direction="column"
-				justifyContent="center"
-				alignItems="center"
-				spacing={{ sm: 1, md: 2, lg: 4, xl: 6 }}
-			>
-				<Typography variant="h4" gutterBottom component="div">
-					Login
-				</Typography>
-				<TextField
-					name='email'
-					type="email"
-					required
-					label="Email"
-					value={email}
-					variant="standard"
-					onChange={({ target }) => handleChange(target)}
-				/>
-				<TextField
-					name='password'
-					type="password"
-					required
-					label="Password"
-					value={password}
-					variant="standard"
-					onChange={({ target }) => handleChange(target)}
-				/>
-			</Stack>
+			<LoginComponent submitLogin={submitLogin} />
+			{errorMessage && <div>{errorMessage}</div>}
+			<CreateNewUser submitCreateUser={submitCreateUser} />
 		</Box>
 	)
 }

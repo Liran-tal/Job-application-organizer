@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Box, Button } from '@mui/material';
-import * as axios from '../api/Axios.Api';
 import FeaturedTable from '../components/featured-table/featured-table.component';
 import FormPopup from '../components/form-popup/form-popup';
 import * as UserData from '../providers/user-data/user-data.context';
@@ -10,7 +9,7 @@ import MOCK_DATA from '../USER_MOCK_DATA.json';
 
 function UserPage() {
 	const userData = UserData.useUserContext()
-	const setUserData = UserData.useSetUserContext();
+	// const setUserData = UserData.useSetUserContext();
 	const [jobsForTable, setJobsForTable] = useState(null);
 	const [jobData, setJobData] = useState(null);
 	const [isShowForm, setIsShowForm] = useState(false);

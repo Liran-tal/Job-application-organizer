@@ -97,3 +97,17 @@ export const deleteItem = async (userId, jobId) => {
   }
 }
 
+
+export const loginUser = async (email, password) => {
+  try {
+    return await ApiHeader.post('/users/create-job', {
+      body: {
+        email,
+        password
+      }
+    });
+  } catch (error) {
+    console.error(error);
+    return error
+  }
+}
