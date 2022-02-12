@@ -1,6 +1,4 @@
-const mongoose = require("mongoose");
 const User = require("../models/user_schema.js");
-const utils = require('../utils/utils')
 
 const createUserService = async (newUserData) => {
 	try {

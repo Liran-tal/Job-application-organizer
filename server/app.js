@@ -17,7 +17,7 @@ app.get('/', (req, res) => {
 
 app.use("/api/users", usersRouter);
 
-app.post('/api/signIn', signInRouter);
+app.use('/api/sign-in', signInRouter);
 
 app.get('*', (req, res) => {
 	res.status(404).send("Page Not Found");

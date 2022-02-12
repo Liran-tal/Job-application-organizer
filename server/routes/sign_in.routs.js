@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
-const {verifyUser} = require("../controllers/signIn/singIn_controllers.js");
+const {verifyUserControler} = require("../controllers/signIn/signIn_controllers.js");
 
-Router.post("/create-user", Controler);
+Router.get("/verify-user", verifyUserControler);
 
 module.exports = Router;

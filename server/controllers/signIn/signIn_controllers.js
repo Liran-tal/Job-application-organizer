@@ -1,0 +1,23 @@
+const User = require("../../models/user_schema");
+
+const verifyUserControler = async (req, res) => {
+	try {
+		if (!req.body.email || !req.body.password) {
+			throw { status: 400, message: "Request must contain email address and valid password" };
+		}
+		
+		const user = await User.findOne({email: req.body.email});
+		if (user && (user.password === req.body.password)) {
+				res.status(200).send(user);
+				return;
+		}
+		res.status(404).send({message: "Wrong Email or Password"});
+	}
+	catch (error) {
+		res.status(error.status).send(error.message);
+	}
+};
+
+module.exports = {
+	verifyUserControler
+};

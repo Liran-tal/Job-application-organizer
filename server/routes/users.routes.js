@@ -9,7 +9,6 @@ const {
 	getJobsControler,
 	updateJobControler,
 	deleteJobControler,
-	getFullJobData
 
 } = require("../controllers/users/users_controllers.js");
 

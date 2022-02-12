@@ -107,16 +107,6 @@ const deleteJobControler = async (req, res) => {
 	}
 };
 
-const getFullJobData = async (req, res) => {
-	try {
-		const { userId, jobId } = req.params
-		const user = await User.findOneById({ _id: userId });
-		const job = user?.applications.find(app => app._id === jobId)
-		res.status(200).send(job)
-	} catch (err) {
-		res.send(err)
-	}
-}
 
 module.exports = {
 	createUserControler,
@@ -126,5 +116,4 @@ module.exports = {
 	getJobsControler,
 	updateJobControler,
 	deleteJobControler,
-	getFullJobData,
 };
