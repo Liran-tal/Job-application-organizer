@@ -16,7 +16,7 @@ function TipsPage() {
 			<Typography
 				variant='h2'
 			>
-				Comming Soon to Web Pages Near You!
+				Coming Soon to Web Pages Near You!
 			</Typography>
 		</Box>
 	)
