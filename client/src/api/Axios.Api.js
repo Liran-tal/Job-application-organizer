@@ -8,23 +8,19 @@ const ApiHeader = axios.create({ baseURL: uri, })
 
 export const addUser = async (newUser) => {
   try {
-    return await ApiHeader.post('/users/create-user', {
-      body: {
-        newUser
-      }   
-    });
+    return await ApiHeader.post('/users/create-user', { newUser });
   } catch (error) {
     console.error(error);
     throw error
   }
 }
 
-export const getUserById = async (id) => {
+export const getUserById = async (userId) => {
   try {
     const { data } = await ApiHeader.get('/users/get-user-by-id', {
-      query: {
-        id
-      }      
+      params: {
+        userId
+      }
     });
     return data;
 
@@ -36,14 +32,7 @@ export const getUserById = async (id) => {
 
 export const addJob = async (userId, newJob) => {
   try {
-    return await ApiHeader.post('/users/create-job', {
-      query: {
-        userId
-      },   
-      body: {
-        newJob
-      }
-    });
+    return await ApiHeader.post('/users/create-job', { userId, newJob });
   } catch (error) {
     console.error(error);
     throw error
@@ -53,7 +42,7 @@ export const addJob = async (userId, newJob) => {
 export const getJobs = async (userId) => {
   try {
     const { data } = await ApiHeader.get('/users/get-jobs', {
-      query: {
+      params: {
         userId
       }
     });
@@ -65,15 +54,13 @@ export const getJobs = async (userId) => {
   }
 }
 
-export const updateJob = async (userId, jobId) => {
+export const updateJob = async (userId, jobData) => {
+  console.log(userId);
+  console.log(jobData);
   try {
     return await ApiHeader.put('/users/update-job', {
-      query: {
-        userId
-      },   
-      body: {
-        jobId
-      }
+      userId,
+      jobData
     });
   } catch (error) {
     console.error(error);
@@ -84,10 +71,8 @@ export const updateJob = async (userId, jobId) => {
 export const deleteItem = async (userId, jobId) => {
   try {
     return await ApiHeader.delete('/users/delete-job', {
-      query: {
-        userId
-      },   
-      body: {
+      data: {
+        userId,
         jobId
       }
     });

@@ -17,8 +17,8 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 	const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 
-	const onSubmit = () => {
-		handleSubmit(userData, setUserData, job, isNew);
+	const onSubmit = async () => {
+		await handleSubmit(userData, setUserData, job, isNew);
 	};
 
 	useEffect(() => {

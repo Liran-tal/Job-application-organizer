@@ -11,11 +11,13 @@ const updateJobsArray = (jobs, update) => {
 
 export const handleSubmit = async (userData, setUserData, job, isNew) => {
 	console.log("userData: ", userData);
+	console.log("userData._id: ", userData._id);
 	console.log("job: ", job);
+	console.log("job._id: ", job._id);
 	console.log("isNew: ", isNew);
 	try {
 		if (isNew) {
-			const addRes = await Axios.addJob(userData.id, job);
+			const addRes = await Axios.addJob(userData._id, job);
 			console.log("addRes: ", addRes);
 			setUserData({
 				...userData,
@@ -23,7 +25,7 @@ export const handleSubmit = async (userData, setUserData, job, isNew) => {
 			});
 		}
 		else {
-			const updateRes = await Axios.updateJob(userData.id, job)
+			const updateRes = await Axios.updateJob(userData._id, job)
 			console.log("updateRes: ", updateRes);
 			setUserData({
 				...userData,

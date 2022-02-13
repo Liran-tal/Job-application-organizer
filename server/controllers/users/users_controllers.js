@@ -1,10 +1,8 @@
-const validator = require("validator");
-const User = require("../../models/user_schema");
 const Services = require("../../services/user_services");
 
 const createUserControler = async (req, res) => {
 	try {
-		const user = req.body
+		const user = req.body.newUser;
 		const newUser = await Services.createUserService(user);
 		res.status(200).send(newUser);
 	}
@@ -14,10 +12,10 @@ const createUserControler = async (req, res) => {
 };
 
 const createJobControler = async (req, res) => {
-	if (!req.query.userId) {
+	if (!req.body.userId) {
 		throw { status: 400, message: "Request must contain user Id" };
 	}
-	const userId = req.query.userId;
+	const userId = req.body.userId;
 	const newJob = req.body.newJob;
 
 	try {
@@ -30,10 +28,10 @@ const createJobControler = async (req, res) => {
 };
 
 const createManyJobsControler = async (req, res) => {
-	if (!req.query.userId) {
+	if (!req.body.userId) {
 		throw { status: 400, message: "Request must contain user Id" };
 	}
-	const userId = req.query.userId;
+	const userId = req.body.userId;
 	const newJobs = req.body;
 
 	try {
@@ -47,10 +45,10 @@ const createManyJobsControler = async (req, res) => {
 
 const getUserByIdControler = async (req, res) => {
 	try {
-		if (!req.query.id) {
+		if (!req.query.userId) {
 			throw { status: 400, message: "Request must contain user Id" };
 		}
-		const user = await Services.getUserByIdService(req.query.id);
+		const user = await Services.getUserByIdService(req.query.userId);
 		res.status(200).send(user);
 	}
 	catch (error) {
@@ -74,14 +72,12 @@ const getJobsControler = async (req, res) => {
 
 const updateJobControler = async (req, res) => {
 	try {
-		if (!req.query.userId) {
+		if (!req.body.userId) {
 			throw { status: 400, message: "Request must contain user Id" };
 		}
-		const userId = req.query.userId;
+		const userId = req.body.userId;
 		const job = req.body.jobData;
 	
-		console.log("userId: ", userId);
-		console.log("job: ", job);
 		const updatedJob = await Services.updateJobService(userId, job);
 		res.status(200).send(updatedJob);
 	}
@@ -92,10 +88,10 @@ const updateJobControler = async (req, res) => {
 
 const deleteJobControler = async (req, res) => {
 	try {
-		if (!req.query.userId) {
+		if (!req.body.userId) {
 			throw { status: 400, message: "Request must contain user Id" };
 		}
-		const userId = req.query.userId;
+		const userId = req.body.userId;
 		const jobId = req.body.jobId;
 
 		const deletedJob = await Services.deleteJobService(userId, jobId);
