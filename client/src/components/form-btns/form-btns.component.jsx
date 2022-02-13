@@ -12,6 +12,7 @@ function FormButtons({ isNew, isEdit, setIsEdit, onSubmit, setIsShowForm }) {
 			await onSubmit();
 			setMessage("Saved Successfuly!");
 			setIsEdit(false);
+			return
 		}  
 		setIsEdit(true);
 	}

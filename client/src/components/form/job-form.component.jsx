@@ -22,10 +22,10 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 	};
 
 	useEffect(() => {
-		if (jobData._id){
+		if (jobData._id) {
 			setJob(jobData);
 			setIsEdit(false);
-		} 
+		}
 	}, [jobData])
 
 	const handleChangeForm = (component, componentName) => {
