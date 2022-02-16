@@ -21,7 +21,7 @@ const NavBar = () => {
 	const setUserData = UserData.useSetUserContext();
 	const [anchorElNav, setAnchorElNav] = useState(null);
 	const [anchorElUser, setAnchorElUser] = useState(null);
-	let navigate = useNavigate();	
+	let navigate = useNavigate();
 
 	const handleOpenNavMenu = ({ currentTarget }) => {
 		setAnchorElNav(currentTarget);
@@ -30,15 +30,16 @@ const NavBar = () => {
 		setAnchorElUser(currentTarget);
 	};
 
-	const handleCloseNavMenu = ({ target }) => {
+	const handleCloseNavMenu = ({ currentTarget }) => {
+		console.log(currentTarget.dataset.value);
 		setAnchorElNav(null);
-		navigate(`${target.value}`)
+		navigate(`${currentTarget.dataset.value}`)
 	};
 
 	const handleCloseUserMenu = () => {
 		setAnchorElUser(null);
 	};
-	
+
 	const handleUserLog = () => {
 		if (!userData) {
 			navigate('/login');
@@ -95,9 +96,9 @@ const NavBar = () => {
 								<MenuItem
 									key={page.value}
 									onClick={handleCloseNavMenu}
-									value={page.value}
+									data-value={page.value}
 								>
-									<Typography textAlign="center">
+									<Typography textAlign="center" value={page.value}>
 										{page.lable}
 									</Typography>
 								</MenuItem>
@@ -122,7 +123,7 @@ const NavBar = () => {
 									color: "white",
 									display: 'block'
 								}}
-								value={page.value}
+								data-value={page.value}
 							>
 								{page.lable}
 							</Button>

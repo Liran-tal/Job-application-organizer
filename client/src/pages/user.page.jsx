@@ -7,7 +7,7 @@ import * as UserData from '../providers/user-data/user-data.context';
 import { EMPTY_FORM } from '../consts/user-schema/user-schema';
 
 function UserPage() {
-	const userData = UserData.useUserContext()
+	const userData = UserData.useUserContext();
 	// const setUserData = UserData.useSetUserContext();
 	const [jobsForTable, setJobsForTable] = useState(userData?.applications || []);
 	const [jobData, setJobData] = useState(null);
