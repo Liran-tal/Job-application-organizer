@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Button, Container, Typography } from '@mui/material';
 import { Theme } from '../../styles/theme.style';
 import { handleJobDelete } from '../../utils/form-utils';
@@ -8,13 +8,21 @@ function FormButtons({ isNew, isEdit, setIsEdit, onSubmit, setIsShowForm }) {
 
 	const onClickSave = async () => {
 		if (isEdit) {
-			await onSubmit();
-			setMessage("Saved Successfuly!");
-			setIsEdit(false);
-			return
+			try {
+				await onSubmit();
+				setMessage("Saved Successfuly!");
+				setIsEdit(false);
+				return;
+			} catch (error) {
+				setMessage("Oops! Somthing went wrong! try again later");
+			}
 		}  
 		setIsEdit(true);
 	}
+
+	useEffect (() => {
+		setMessage('');
+	}, [isEdit]);
 
 	return (
 		<Container

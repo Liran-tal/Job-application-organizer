@@ -76,34 +76,12 @@ const getJobsService = async (userId) => {
 
 const updateJobService = async (userId, job) => {
 	try {
-		// const user = await User.findById(userId);
-		// if (!user) {
-		// 	throw { status: 404, message: error.message };
-		// }
-		// const edit = async (pasportId, 
-		// 	userDto) => {
-		// 	const userToEdit = await User.findOneAndUpdate(
-		// 		{ pasportId: pasportId },
-		// 		userDto,
-		// 		{ new: true }
-		// 	);
-		// 	if (!userToEdit) {
-		// 		throw new Error(`The user with id ${id} is not found`);
-		// 	}
-		// 	return userToEdit;
-		// };
-
-		// console.log(`\nUser before change dB: \n`, user.applications);
-		// user.applications = utils.updateJobsArray(user.applications, job);
-		const updatedJob = await User.findOneAndUpdate(
+		await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": job._id },
 			{ $set: { "applications.$": job } },
 			{ new: true }
 		)
-		// await User.save();
-		console.log(`\nUser After save to dB: \n`, updatedJob);
-		// return User.applications;
-		return updatedJob;
+		return job;
 	}
 	catch (error) {
 		console.error(error);

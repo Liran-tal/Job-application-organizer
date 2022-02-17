@@ -1,34 +1,35 @@
 import * as Axios from '../api/Axios.Api';
 
-const updateJobsArray = (jobs, update) => {
-	const updateIndex = jobs.findIndex((job) => update._id === job._id);
-	jobs[updateIndex] = update;
-	update 
-		? jobs.splice(updateIndex, 1, update) 
-		: jobs.splice(updateIndex, 1);
-	return jobs;
-}
+// const updateJobsArray = (jobs, update) => {
+// 	const updateIndex = jobs.findIndex((job) => update._id === job._id);
+// 	jobs[updateIndex] = update;
+// 	update 
+// 		? jobs.splice(updateIndex, 1, update) 
+// 		: jobs.splice(updateIndex, 1);
+// 	return jobs;
+// }
 
 export const handleSubmit = async (userData, setUserData, update, isNew) => {
+	console.log(userData);
 	try {
-		if (update._id) {
+		if (!update._id) {
 			const createRes = await Axios.addJob(userData._id, update);
 			console.log("createRes: ", createRes);
-			setUserData({
-				...userData,
-				applications: [...userData.applications, createRes.data]
-			});
+			// setUserData({
+			// 	...userData,
+			// 	applications: [...userData.applications, createRes.data]
+			// });
 		}
 		else {
 			const updateRes = await Axios.updateJob(userData._id, update)
 			console.log("updateRes: ", updateRes);
 			const jobs = userData.applications;
 			const updateIndex = jobs.findIndex((job) => update._id === job._id);
-			jobs.splice(updateIndex, 1, update);
-			setUserData({
-				...userData,
-				applications: jobs
-			});
+			return jobs.splice(updateIndex, 1, update);
+			// setUserData({
+			// 	...userData,
+			// 	applications: jobs
+			// });
 		}
 	} catch (error) {
 			console.error(error);	

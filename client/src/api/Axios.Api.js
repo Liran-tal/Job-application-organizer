@@ -55,8 +55,6 @@ export const getJobs = async (userId) => {
 }
 
 export const updateJob = async (userId, jobData) => {
-  console.log(userId);
-  console.log(jobData);
   try {
     return await ApiHeader.put('/users/update-job', {
       userId,

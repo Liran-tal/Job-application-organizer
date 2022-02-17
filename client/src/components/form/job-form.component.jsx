@@ -18,11 +18,18 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 	const setUserData = UserData.useSetUserContext();
 
 	const onSubmit = async () => {
-		await handleSubmit(userData, setUserData, job, isNew);
+		try {
+			const updatedJobs = await handleSubmit(userData, setUserData, job, isNew);
+			setUserData({
+				...userData,
+				applications: updatedJobs
+			})
+		} catch (error) {
+			throw error;
+		}
 	};
 
 	useEffect(() => {
-		console.log(jobData);
 		setJob(jobData);
 		setIsEdit(isNew);
 	}, [jobData, isNew])
@@ -30,8 +37,6 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 	const handleChangeForm = (component, componentName) => {
 		setJob({ ...job, [componentName]: component });
 	};
-
-
 
 	return (
 		<StyledForm
