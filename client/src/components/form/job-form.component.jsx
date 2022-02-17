@@ -25,13 +25,7 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 		console.log(jobData);
 		setJob(jobData);
 		setIsEdit(isNew);
-		// if (jobData._id) {
-		// 	setIsEdit(false);
-		// }
-		// else {
-			
-		// }
-	}, [jobData])
+	}, [jobData, isNew])
 
 	const handleChangeForm = (component, componentName) => {
 		setJob({ ...job, [componentName]: component });

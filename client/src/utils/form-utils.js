@@ -2,34 +2,32 @@ import * as Axios from '../api/Axios.Api';
 
 const updateJobsArray = (jobs, update) => {
 	const updateIndex = jobs.findIndex((job) => update._id === job._id);
-	// jobs[updateIndex] = update;
+	jobs[updateIndex] = update;
 	update 
 		? jobs.splice(updateIndex, 1, update) 
 		: jobs.splice(updateIndex, 1);
 	return jobs;
 }
 
-export const handleSubmit = async (userData, setUserData, job, isNew) => {
-	console.log("userData: ", userData);
-	console.log("userData._id: ", userData._id);
-	console.log("job: ", job);
-	console.log("job._id: ", job._id);
-	console.log("isNew: ", isNew);
+export const handleSubmit = async (userData, setUserData, update, isNew) => {
 	try {
-		if (isNew) {
-			const addRes = await Axios.addJob(userData._id, job);
-			console.log("addRes: ", addRes);
+		if (update._id) {
+			const createRes = await Axios.addJob(userData._id, update);
+			console.log("createRes: ", createRes);
 			setUserData({
 				...userData,
-				applications: [...userData.applications, addRes.data]
+				applications: [...userData.applications, createRes.data]
 			});
 		}
 		else {
-			const updateRes = await Axios.updateJob(userData._id, job)
+			const updateRes = await Axios.updateJob(userData._id, update)
 			console.log("updateRes: ", updateRes);
+			const jobs = userData.applications;
+			const updateIndex = jobs.findIndex((job) => update._id === job._id);
+			jobs.splice(updateIndex, 1, update);
 			setUserData({
 				...userData,
-				applications: updateJobsArray(userData.applications, updateRes.data)
+				applications: jobs
 			});
 		}
 	} catch (error) {
@@ -38,12 +36,15 @@ export const handleSubmit = async (userData, setUserData, job, isNew) => {
 };
 
 
-export const handleJobDelete = async (userData, jobId, setUserData) => {
+export const handleJobDelete = async (userData, delitionId, setUserData) => {
 	try {
-		await Axios.deleteItem (userData._id, jobId);
+		await Axios.deleteItem (userData._id, delitionId);
+		const jobs = userData.applications;
+		const updateIndex = jobs.findIndex((job) => delitionId === job._id);
+		jobs.splice(updateIndex, 1);
 		setUserData({
 			...userData,
-			applications: updateJobsArray(userData.applications)
+			applications: jobs
 		});
 	} catch (error) {
 		console.error(error);	

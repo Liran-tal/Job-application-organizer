@@ -3,8 +3,6 @@ import React from 'react'
 import JobForm from '../form/job-form.component'
 
 function FormPopup({ jobData, isShowForm, setIsShowForm }) {
-	console.log("jobData: ", jobData);
-	console.log("jobData._id: ", jobData._id);
 	return (
 		<Box
 			sx={{

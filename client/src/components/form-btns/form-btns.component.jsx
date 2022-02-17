@@ -4,7 +4,6 @@ import { Theme } from '../../styles/theme.style';
 import { handleJobDelete } from '../../utils/form-utils';
 
 function FormButtons({ isNew, isEdit, setIsEdit, onSubmit, setIsShowForm }) {
-	console.log(isEdit, isNew);
 	const [message, setMessage] = useState(null);
 
 	const onClickSave = async () => {

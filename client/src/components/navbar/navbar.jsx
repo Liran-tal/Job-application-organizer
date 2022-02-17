@@ -26,6 +26,7 @@ const NavBar = () => {
 	const handleOpenNavMenu = ({ currentTarget }) => {
 		setAnchorElNav(currentTarget);
 	};
+	
 	const handleOpenUserMenu = ({ currentTarget }) => {
 		setAnchorElUser(currentTarget);
 	};
