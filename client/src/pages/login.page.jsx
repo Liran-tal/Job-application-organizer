@@ -10,7 +10,7 @@ function LoginPage() {
 	// const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 	const [errorMessage, setErrorMessage] = useState(null);
-	let navigate = useNavigate()
+	let navigate = useNavigate();
 
 	const submitLogin = async (email, password) => {
 		try {
@@ -19,7 +19,7 @@ function LoginPage() {
 			setUserData(data);
 			navigate('/');
 		} catch (error) {
-			setErrorMessage(errorMessage);
+			setErrorMessage("User-Name or Password are invalid");
 		}
 	};
 
@@ -34,7 +34,7 @@ function LoginPage() {
 			setUserData(user);
 			navigate('/');
 		} catch (error) {
-			setErrorMessage(errorMessage);
+			setErrorMessage(`Error ${error.status}: ${error.message}`);
 		}
 	};
 

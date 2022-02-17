@@ -15,6 +15,13 @@ function LoginComponent({ submitLogin }) {
 		setPassword(target.value);
 	}
 
+	const onClickEnter = (event) => {
+		console.log(event);
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
+	};
+
 	const handleSubmit = () => {
 		submitLogin(email, password);
 	}
@@ -42,13 +49,14 @@ function LoginComponent({ submitLogin }) {
 				onChange={handleChange}
 			/>
 			<TextField
-				name='password'
+				name='loginPassword'
 				type="password"
 				required
 				label="Password"
 				value={password}
 				variant="standard"
 				onChange={handleChange}
+				onKeyPress={onClickEnter}
 			/>
 			<Button
 				onClick={handleSubmit}
@@ -59,6 +67,7 @@ function LoginComponent({ submitLogin }) {
 			>
 				Login
 			</Button>
+			
 		</Stack>
 	)
 }

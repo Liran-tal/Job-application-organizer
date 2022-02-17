@@ -23,6 +23,12 @@ function CreateNewUser(submitCreateUser) {
 		}
 	}
 
+	const onClickEnter = (event) => {
+		if (event.key === "Enter") {
+			handleSubmit();
+		}
+	};
+
 	const handleSubmit = () => {
 		submitCreateUser(userName, email, password);
 	}
@@ -66,6 +72,7 @@ function CreateNewUser(submitCreateUser) {
 				value={password}
 				variant="standard"
 				onChange={handleChange}
+				onKeyPress={onClickEnter}
 			/>
 			<Button
 				onClick={handleSubmit}

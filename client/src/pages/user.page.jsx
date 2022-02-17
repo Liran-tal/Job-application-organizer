@@ -29,7 +29,7 @@ function UserPage() {
 	}
 
 	const handleNewApplication = () => {
-		setJobData(EMPTY_FORM);
+		setJobData(null);
 		setIsShowForm(true);
 	}
 

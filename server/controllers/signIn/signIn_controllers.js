@@ -12,7 +12,7 @@ const verifyUserControler = async (req, res) => {
 				res.status(200).send(user);
 				return;
 		}
-		res.status(404).send({message: "Wrong Email or Password"});
+		res.status(404).send({ok: false});
 	}
 	catch (error) {
 		res.status(error.status).send(error.message);
