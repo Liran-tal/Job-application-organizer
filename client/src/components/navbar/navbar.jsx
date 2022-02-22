@@ -53,7 +53,7 @@ const NavBar = () => {
 
 	return (
 		<AppBar position="static" sx={{ width: "100%" }}>
-			<Container maxWidth="xl" sx={{ backgroundColor: Theme.palette.primary.dark }}>
+			<Container maxWidth="xl" sx={{ backgroundColor: Theme.palette.primary.dark, padding: "0 2rem" }}>
 				<Toolbar disableGutters>
 					<Typography
 						variant="h6"
@@ -61,7 +61,7 @@ const NavBar = () => {
 						component="div"
 						sx={{ mr: 2, display: { xs: 'none', md: 'flex' } }}
 					>
-						LOGO
+						My Jobs Organizer
 					</Typography>
 
 					<Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
@@ -112,7 +112,7 @@ const NavBar = () => {
 						component="div"
 						sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}
 					>
-						LOGO
+						My Jobs Organizer
 					</Typography>
 					<Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
 						{pages.map((page) => (
