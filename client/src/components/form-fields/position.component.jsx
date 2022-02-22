@@ -4,8 +4,6 @@ import TextField from '@mui/material/TextField';
 import DateTimeWidget from '../data-time-picker/date-time-picker.component'
 
 function Position({ position, handleChangeForm, isEdit }) {
-	// const [title, setTitle] = useState(position.title || "")
-	// console.log(position.title)
 	const handleChange = (target) => {
 		position = {
 			...position,

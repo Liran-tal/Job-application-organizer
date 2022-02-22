@@ -43,7 +43,7 @@ function HomePage() {
 					color: Theme.palette.complementary
 				}}
 			>
-				Organize your applications wherever you go!
+				Organize your job applications wherever you go!
 			</Typography>
 			<BasicTable page={page}/>
 		</Box>

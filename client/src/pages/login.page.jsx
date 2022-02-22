@@ -15,7 +15,6 @@ function LoginPage() {
 	const submitLogin = async (email, password) => {
 		try {
 			const {data} = await axios.loginUser(email, password);
-			console.log(data);
 			setUserData(data);
 			navigate('/');
 		} catch (error) {

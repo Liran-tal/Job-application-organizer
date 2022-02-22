@@ -15,6 +15,7 @@ function UserPage() {
 	let navigate = useNavigate();
 
 	useEffect(() => {
+		console.log(userData);
 		if (userData) {
 			setJobsForTable(userData.applications);
 		}

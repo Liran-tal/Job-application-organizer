@@ -16,7 +16,6 @@ function LoginComponent({ submitLogin }) {
 	}
 
 	const onClickEnter = (event) => {
-		console.log(event);
 		if (event.key === "Enter") {
 			handleSubmit();
 		}
