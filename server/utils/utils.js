@@ -1,3 +1,5 @@
+const { application } = require("express");
+
 const updateJobsArray = (jobs, update) => {
 	console.log(`\n\n index to search: \n`, update._id);
 	console.log(` index of array[0]: \n\n`, jobs[0]._id);
@@ -8,6 +10,11 @@ const updateJobsArray = (jobs, update) => {
 	return jobs
 }
 
+const findJobById = (applications, id) => {
+	return applications.find((elm) => elm._id.toString() === id); 
+}
+
 module.exports = {
 	updateJobsArray,
+	findJobById,
 }

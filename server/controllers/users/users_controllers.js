@@ -61,10 +61,14 @@ const getUserByIdControler = async (req, res) => {
 
 const getJobsControler = async (req, res) => {
 	try {
-		if (!req.query.userId) {
+		const userId = req.query.userId;
+		if (!userId) {
 			throw { status: 400, message: "Request must contain user Id" };
 		}
-		const jobData = await Services.getJobsService(req.query.userId);
+
+		const jobId = req.query.jobId;
+
+		const jobData = await Services.getJobsService(userId, jobId);
 		res.status(200).send(jobData);
 	}
 	catch (error) {

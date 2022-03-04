@@ -1,4 +1,5 @@
 const User = require("../models/user_schema.js");
+const { findJobById } = require("../utils/utils.js");
 
 const createUserService = async (newUserData) => {
 	try {
@@ -60,12 +61,21 @@ const getUserByIdService = async (id) => {
 	}
 };
 
-const getJobsService = async (userId) => {
+const getJobsService = async (userId, jobId) => {
 	try {
-		const user = await User.findById(userId);
+		const user = await User.findById(userId).lean();
 		if (!user) {
 			throw { status: 404, message: error.message };
 		}
+
+		if (jobId) {
+			const job = findJobById(user.applications, jobId);
+			if (!job) {
+				throw { status: 404, message: `job._id: ${jobId} not found` };
+			}
+			return job;
+		}
+
 		return user.applications;
 	}
 	catch (error) {
