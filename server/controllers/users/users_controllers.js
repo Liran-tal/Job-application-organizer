@@ -95,14 +95,18 @@ const updateJobControler = async (req, res) => {
 
 const deleteJobControler = async (req, res) => {
 	try {
-		if (!req.body.userId) {
+		const userId = req.query.userId;
+		if (!userId) {
 			throw { status: 400, message: "Request must contain user Id" };
 		}
-		const userId = req.body.userId;
-		const jobId = req.body.jobId;
 
-		const deletedJob = await Services.deleteJobService(userId, jobId);
-		res.status(200).send(JSON.stringify(deletedJob));
+		const jobId = req.query.jobId;
+		if (!jobId) {
+			throw { status: 400, message: "Request must contain user Id" };
+		}
+
+		const returnObj = await Services.deleteJobService(userId, jobId);
+		res.status(200).send(JSON.stringify(returnObj));
 	}
 	catch (error) {
 		console.error("deleteJobControler, ", error)
