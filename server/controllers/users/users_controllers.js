@@ -12,15 +12,18 @@ const createUserControler = async (req, res) => {
 };
 
 const createJobControler = async (req, res) => {
-	if (!req.body.userId) {
-		throw { status: 400, message: "Request must contain user Id" };
-	}
-	const userId = req.body.userId;
-	const newJob = req.body.newJob;
+	const userId = req.query.userId;
+	if (!userId) {
+		res.status(400).send("User Id required");
+	};
 
+	const newJob = req.body.newJob;
+	if (!userId) {
+		res.status(400).send("New job object required");
+	};
 	try {
-		const user = await Services.createJobService(userId, newJob);
-		res.status(200).send(user);
+		const savedJob = await Services.createJobService(userId, newJob);
+		res.status(200).send(savedJob);
 	}
 	catch (error) {
 		res.status(error.status).send(error.message);
@@ -77,7 +80,7 @@ const updateJobControler = async (req, res) => {
 		}
 		const userId = req.body.userId;
 		const job = req.body.jobData;
-	
+
 		const updatedJob = await Services.updateJobService(userId, job);
 		res.status(200).send(updatedJob);
 	}
@@ -106,7 +109,7 @@ const deleteJobControler = async (req, res) => {
 
 module.exports = {
 	createUserControler,
-	createJobControler, 
+	createJobControler,
 	createManyJobsControler,
 	getUserByIdControler,
 	getJobsControler,

@@ -21,8 +21,8 @@ const createJobService = async (userId, newJob) => {
 		}
 
 		user.applications.push(newJob);
-		await user.save();
-		return user.applications;
+		const resultUser = await user.save();
+		return resultUser.applications[resultUser.applications.length - 1];
 	}
 	catch (error) {
 		console.error(error);
@@ -93,7 +93,7 @@ const deleteJobService = async (userId, jobId) => {
 	try {
 		await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": jobId },
-			{ $pull: { "applications": { "_id": jobId } } },
+			{ $pull: { applications: { _id: jobId } } },
 			{ safe: true, multi: true },
 		)
 

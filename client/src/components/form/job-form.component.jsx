@@ -8,6 +8,7 @@ import MiscFields from '../form-fields/misc-fields.component';
 import FormButtons from '../form-btns/form-btns.component';
 import * as UserData from '../../providers/user-data/user-data.context';
 import { handleSubmit } from '../../utils/form-utils'
+import { handleJobDelete } from '../../utils/form-utils';
 import { StyledForm } from './job-form.style';
 
 function JobForm({ jobData, isNew, setIsShowForm }) {
@@ -29,6 +30,21 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 			throw error;
 		}
 	};
+
+	const onDelete = async () => {
+		if (job._id) {
+			try {
+				const updatedJobs = await handleJobDelete (userData, job._id);
+				setUserData({
+					...userData,
+					applications: updatedJobs
+				})
+			} catch (error) {
+				throw error;
+			}
+		}
+
+	}
 
 	useEffect(() => {
 		setJob(jobData);
@@ -52,7 +68,6 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 			>
 				<Position
 					position={job.position}
-					name="position"
 					isEdit={isEdit}
 					handleChangeForm={handleChangeForm}
 				/>
@@ -83,6 +98,7 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 				setIsEdit={setIsEdit}
 				onSubmit={onSubmit}
 				setIsShowForm={setIsShowForm}
+				onDelete={onDelete}
 			/>
 		</StyledForm>
 	);

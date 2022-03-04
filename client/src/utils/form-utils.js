@@ -1,16 +1,18 @@
 import * as Axios from '../api/Axios.Api';
 
 export const handleSubmit = async (userData, setUserData, update, isNew) => {
+	console.log(userData._id);
 	try {
 		if (!update._id) {
 			const createRes = await Axios.addJob(userData._id, update);
-			return userData.applications.push(createRes);
+			userData.applications.push(createRes);
+			return userData.applications;
 		}
 		else {
 			const updateRes = await Axios.updateJob(userData._id, update)
 			const jobs = userData.applications;
 			const updateIndex = jobs.findIndex((job) => update._id === job._id);
-			jobs.splice(updateIndex, 1, updateRes.data);
+			updateIndex > -1 && jobs.splice(updateIndex, 1, updateRes.data);
 			return jobs;
 		}
 	} catch (error) {
@@ -19,17 +21,15 @@ export const handleSubmit = async (userData, setUserData, update, isNew) => {
 };
 
 
-export const handleJobDelete = async (userData, delitionId, setUserData) => {
+export const handleJobDelete = async (userData, delitionId) => {
 	try {
 		await Axios.deleteItem (userData._id, delitionId);
 		const jobs = userData.applications;
 		const updateIndex = jobs.findIndex((job) => delitionId === job._id);
-		jobs.splice(updateIndex, 1);
-		setUserData({
-			...userData,
-			applications: jobs
-		});
+		updateIndex > -1 && jobs.splice(updateIndex, 1);
+		return jobs;
 	} catch (error) {
 		console.error(error);	
+		throw error;
 	}
 }
