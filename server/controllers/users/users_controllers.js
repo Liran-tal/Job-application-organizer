@@ -3,11 +3,11 @@ const Services = require("../../services/user_services");
 const createUserControler = async (req, res) => {
 	try {
 		const user = req.body.newUser;
-		const newUser = await Services.createUserService(user);
-		res.status(200).send(newUser);
+		const resObj = await Services.createUserService(user);
+		res.status(200).send(resObj);
 	}
 	catch (error) {
-		res.status(error.status).send(error.message);
+		res.status(400).send(error.message);
 	}
 };
 
@@ -22,74 +22,83 @@ const createJobControler = async (req, res) => {
 		res.status(400).send("New job object required");
 	};
 	try {
-		const savedJob = await Services.createJobService(userId, newJob);
-		res.status(200).send(savedJob);
+		const resObj = await Services.createJobService(userId, newJob);
+		res.status(200).send(resObj);
 	}
 	catch (error) {
-		res.status(error.status).send(error.message);
+		res.status(404).send(error.message);
 	}
 };
 
 const createManyJobsControler = async (req, res) => {
-	if (!req.body.userId) {
-		throw { status: 400, message: "Request must contain user Id" };
-	}
-	const userId = req.body.userId;
-	const newJobs = req.body;
+	const { userId } = req.query;
+	if (!userId) {
+		res.status(400).send("userId required");
+	};
+
+	const { newJobs } = req.body;
+	if (!newJobs) {
+		res.status(400).send("New jobs array required");
+	};
 
 	try {
-		const user = await Services.createManyJobsService(userId, newJobs);
-		res.status(200).send(user);
+		const resObj = await Services.createManyJobsService(userId, newJobs);
+		res.status(200).send(resObj);
 	}
 	catch (error) {
-		res.status(error.status).send(error.message);
+		res.status(404).send(error.message);
 	}
 };
 
 const getUserByIdControler = async (req, res) => {
+	if (!req.query.userId) {
+		res.status(400).send("userId required");
+	}
+
 	try {
-		if (!req.query.userId) {
-			throw { status: 400, message: "Request must contain user Id" };
-		}
-		const user = await Services.getUserByIdService(req.query.userId);
-		res.status(200).send(user);
+		const resObj = await Services.getUserByIdService(req.query.userId);
+		res.status(200).send(resObj);
 	}
 	catch (error) {
-		res.status(error.status).send(error.message);
+		res.status(404).send(error.message);
 	}
 };
 
 const getJobsControler = async (req, res) => {
 	try {
-		const userId = req.query.userId;
+		const { userId } = req.query;
 		if (!userId) {
-			throw { status: 400, message: "Request must contain user Id" };
+			res.status(400).send("userId required as query");
 		}
 
-		const jobId = req.query.jobId;
+		const {jobId} = req.query;
+		if (!userId) {
+			res.status(400).send("jobId required as query");
+		}
 
 		const jobData = await Services.getJobsService(userId, jobId);
 		res.status(200).send(jobData);
 	}
 	catch (error) {
-		res.status(error.status).send(error.message);
+		res.status(404).send(error.message);
 	}
 };
 
 
 const updateJobControler = async (req, res) => {
 	try {
-		const userId = req.query.userId;
+		const {userId} = req.query;
 		if (!userId) {
-			const error = new Error ("Request must contain user Id");
-			error.resStatus = 404;
-			throw error;
+			res.status(400).send("jobId required as query");
 		}
 
 		const { jobData } = req.body;
+		if (!userId) {
+			res.status(400).send("jobData required as body");
+		}
 
-		const resJob = await Services.updateJobService(userId, jobData);
-		res.status(200).send(resJob);
+		const resObj = await Services.updateJobService(userId, jobData);
+		res.status(200).send(resObj);
 	}
 	catch (error) {
 		console.error(error);
@@ -101,20 +110,20 @@ const deleteJobControler = async (req, res) => {
 	try {
 		const userId = req.query.userId;
 		if (!userId) {
-			throw { status: 400, message: "Request must contain user Id" };
+			res.status(400).send("userId required as query");
 		}
 
 		const jobId = req.query.jobId;
 		if (!jobId) {
-			throw { status: 400, message: "Request must contain user Id" };
+			return res.status(400).send("jobId required as query");
 		}
 
 		const returnObj = await Services.deleteJobService(userId, jobId);
-		res.status(200).send(JSON.stringify(returnObj));
+		res.status(200).send(returnObj);
 	}
 	catch (error) {
 		console.error("deleteJobControler, ", error)
-		res.status(error.status).send(error.message);
+		res.status(404).send(error.message);
 	}
 };
 

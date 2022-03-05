@@ -5,11 +5,11 @@ const createUserService = async (newUserData) => {
 	try {
 		const newUser = new User(newUserData);
 		const user = await newUser.save();
-		return user;
+		return { ok: true, data: user, message: "Success", };
 	}
 	catch (error) {
 		console.error("Error in createUserService: ", error);
-		throw { status: 400, message: error.message };
+		throw error;
 	}
 };
 
@@ -18,16 +18,20 @@ const createJobService = async (userId, newJob) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
-			throw { status: 404, message: error.message };
+			return { ok: false, data: undefined, message: "User not found" };
 		}
 
 		user.applications.push(newJob);
 		const resultUser = await user.save();
-		return resultUser.applications[resultUser.applications.length - 1];
+		return { 
+			ok: true, 
+			data: resultUser.applications[resultUser.applications.length - 1],
+			message: "Success", 
+		};
 	}
 	catch (error) {
 		console.error(error);
-		throw { status: 400, message: error.message };
+		throw error;
 	}
 };
 
@@ -36,7 +40,7 @@ const createManyJobsService = async (userId, newJobs) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
-			throw { status: 404, message: error.message };
+			return { ok: false, data: undefined, message: "User not found" };
 		}
 		newJobs.forEach((job) => {
 			user.applications.push(job);
@@ -46,7 +50,7 @@ const createManyJobsService = async (userId, newJobs) => {
 	}
 	catch (error) {
 		console.error(error);
-		throw { status: 400, message: error.message };
+		throw error;
 	}
 };
 
@@ -65,15 +69,15 @@ const getJobsService = async (userId, jobId) => {
 	try {
 		const user = await User.findById(userId).lean();
 		if (!user) {
-			throw { status: 404, message: error.message };
+			return { ok: false, data: undefined, message: "User not found" };
 		}
 
 		if (jobId) {
 			const job = findJobById(user.applications, jobId);
 			if (!job) {
-				throw { status: 404, message: `job._id: ${jobId} not found` };
+				return { ok: false, data: undefined, message: "Application Not found" };
 			}
-			return job;
+			return { ok: true, data: job, message: "Success" };
 		}
 
 		return user.applications;
