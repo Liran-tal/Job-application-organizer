@@ -86,26 +86,33 @@ const getJobsService = async (userId, jobId) => {
 
 const updateJobService = async (userId, job) => {
 	try {
-		await User.findOneAndUpdate(
+		const updated = await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": job._id },
-			{ $set: { "applications.$": job } },
+			{ "applications.$": job },
 			{ new: true }
 		)
-		return job;
+		if (!updated) {
+			return { ok: false, data: undefined, message: "Not found" };
+		}
+		return { ok: true, data: job, message: "Success" };
 	}
 	catch (error) {
-		console.error(error);
-		throw { status: 500, message: error.message };
+		console.error("Update service: ", error);
+		throw error;
 	}
 };
 
 const deleteJobService = async (userId, jobId) => {
 	try {
-		await User.findOneAndUpdate(
+		const deleted = await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": jobId },
 			{ $pull: { applications: { _id: jobId } } },
-			{ safe: true, multi: true },
-		)
+			{ multi: true },
+		);
+
+		if (!deleted) {
+			return { ok: false, data: undefined, message: "Not found" };
+		}
 
 		return { success: true, message: `objId: ${jobId} deleted` };
 	} catch (error) {
