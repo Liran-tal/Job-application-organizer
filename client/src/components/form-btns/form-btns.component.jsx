@@ -30,13 +30,13 @@ function FormButtons(props) {
 		// setIsEdit(true);
 	}
 
-	const onClickDelete = () => {
+	const onClickDelete = async () => {
 		if (isNew) {
 			setIsShowForm(false);
 			return;
 		}
 		try {
-			onDelete();
+			await onDelete();
 			navigate('/user');
 		} catch (error) {
 			setMessage(ERROR_MSG);

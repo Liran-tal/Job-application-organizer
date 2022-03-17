@@ -34,7 +34,7 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 	const onDelete = async () => {
 		if (job._id) {
 			try {
-				const updatedJobs = await handleJobDelete (userData, job._id);
+				const updatedJobs = await handleJobDelete(userData, job._id);
 				setUserData({
 					...userData,
 					applications: updatedJobs
@@ -43,7 +43,6 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 				throw error;
 			}
 		}
-
 	}
 
 	useEffect(() => {
