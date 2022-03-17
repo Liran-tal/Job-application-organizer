@@ -7,7 +7,6 @@ import LoginComponent from '../components/login-create-new/login.component'
 import { useNavigate } from 'react-router-dom';
 
 function LoginPage() {
-	// const userData = UserData.useUserContext()
 	const setUserData = UserData.useSetUserContext();
 	const [errorMessage, setErrorMessage] = useState(null);
 	let navigate = useNavigate();

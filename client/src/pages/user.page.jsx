@@ -20,7 +20,7 @@ function UserPage() {
 			setJobsForTable(userData.applications);
 		}
 		else {
-			navigate('/');
+			// navigate('/');
 		}
 	}, [userData, navigate]);
 	

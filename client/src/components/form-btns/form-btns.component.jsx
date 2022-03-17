@@ -3,9 +3,12 @@ import { Button, Container, Typography } from '@mui/material';
 import { Theme } from '../../styles/theme.style';
 import { useNavigate } from 'react-router-dom';
 
+const SUCCESS_MSG = "Saved Successfuly!";
+const ERROR_MSG = "Oops! Something went wrong! try again later";
+
 function FormButtons(props) {
-	const [message, setMessage] = useState(null);
 	const { isNew, isEdit, setIsEdit, onSubmit, setIsShowForm, onDelete } = props;
+	const [message, setMessage] = useState(null);
 	let navigate = useNavigate();
 	
 	useEffect(() => {
@@ -13,18 +16,18 @@ function FormButtons(props) {
 	}, [isEdit]);
 
 	const onClickSave = async (event) => {
-		
-		if (isEdit) {
-			try {
-				await onSubmit();
-				setMessage("Saved Successfuly!");
-				setIsEdit(false);
-				return;
-			} catch (error) {
-				setMessage("Oops! Somthing went wrong! try again later");
-			}
-		}
-		setIsEdit(true);
+		console.log(isEdit);
+		// if (isEdit) {
+		// 	try {
+		// 		await onSubmit();
+		// 		setMessage(SUCCESS_MSG);
+		// 		setIsEdit(false);
+		// 		return;
+		// 	} catch (error) {
+		// 		setMessage(ERROR_MSG);
+		// 	}
+		// }
+		// setIsEdit(true);
 	}
 
 	const onClickDelete = () => {
@@ -36,7 +39,7 @@ function FormButtons(props) {
 			onDelete();
 			navigate('/user');
 		} catch (error) {
-			setMessage("Oops! Somthing went wrong! try again later");
+			setMessage(ERROR_MSG);
 		}
 	}
 

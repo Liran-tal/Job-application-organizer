@@ -61,6 +61,7 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 			component="form"
 			autoComplete="off"
 		>
+			{/* TODO: move grid to separate component */}
 			<Grid
 				container
 				rowSpacing={3}

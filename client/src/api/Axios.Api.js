@@ -69,7 +69,7 @@ export const updateJob = async (userId, jobData) => {
 export const deleteItem = async (userId, jobId) => {
   try {
     return await ApiHeader.delete('/users/job', {
-      data: {
+      params: {
         userId,
         jobId
       }
