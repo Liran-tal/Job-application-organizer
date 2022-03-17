@@ -18,7 +18,7 @@ function LoginPage() {
 			setUserData(data);
 			navigate('/');
 		} catch (error) {
-			setErrorMessage("User-Name or Password are invalid");
+			setErrorMessage("Email or Password are invalid");
 		}
 	};
 
@@ -52,8 +52,8 @@ function LoginPage() {
 			}}
 		>
 			<LoginComponent submitLogin={submitLogin} />
-			{errorMessage && <div>{errorMessage}</div>}
 			<CreateNewUser submitCreateUser={submitCreateUser} />
+			{errorMessage && <div>{errorMessage}</div>}
 		</Box>
 	)
 }

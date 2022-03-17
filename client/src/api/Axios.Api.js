@@ -8,7 +8,7 @@ const ApiHeader = axios.create({ baseURL: uri, })
 
 export const addUser = async (newUser) => {
   try {
-    return await ApiHeader.post('/users/create-user', { newUser });
+    return await ApiHeader.post('/users/user', { newUser });
   } catch (error) {
     console.error(error);
     throw error
@@ -17,7 +17,7 @@ export const addUser = async (newUser) => {
 
 export const getUserById = async (userId) => {
   try {
-    const { data } = await ApiHeader.get('/users/get-user-by-id', {
+    const { data } = await ApiHeader.get('/users/user', {
       params: {
         userId
       }
@@ -32,7 +32,7 @@ export const getUserById = async (userId) => {
 
 export const addJob = async (userId, newJob) => {
   try {
-    return await ApiHeader.post('/users/create-job', { userId, newJob });
+    return await ApiHeader.post('/users/job', { userId, newJob });
   } catch (error) {
     console.error(error);
     throw error
@@ -41,7 +41,7 @@ export const addJob = async (userId, newJob) => {
 
 export const getJobs = async (userId) => {
   try {
-    const { data } = await ApiHeader.get('/users/get-jobs', {
+    const { data } = await ApiHeader.get('/users/jobs', {
       params: {
         userId
       }
@@ -56,7 +56,7 @@ export const getJobs = async (userId) => {
 
 export const updateJob = async (userId, jobData) => {
   try {
-    return await ApiHeader.put('/users/update-job', {
+    return await ApiHeader.put('/users/job', {
       userId,
       jobData
     });
@@ -68,7 +68,7 @@ export const updateJob = async (userId, jobData) => {
 
 export const deleteItem = async (userId, jobId) => {
   try {
-    return await ApiHeader.delete('/users/delete-job', {
+    return await ApiHeader.delete('/users/job', {
       data: {
         userId,
         jobId
@@ -83,7 +83,7 @@ export const deleteItem = async (userId, jobId) => {
 
 export const loginUser = async (email, password) => {
   try {
-    return await ApiHeader.get('/sign-in/verify-user', {
+    return await ApiHeader.get('/sign-in/user', {
       params: {
         email,
         password
