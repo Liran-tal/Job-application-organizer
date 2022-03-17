@@ -1,7 +1,7 @@
 const express = require("express");
 const Router = express.Router();
-const {verifyUserControler} = require("../controllers/signIn/signIn_controllers.js");
+const {verifyUser} = require("../controllers/signIn/signIn_controllers.js");
 
-Router.get("/verify-user", verifyUserControler);
+Router.get("/user", verifyUser);
 
 module.exports = Router;

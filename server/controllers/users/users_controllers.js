@@ -1,9 +1,9 @@
 const Services = require("../../services/user_services");
 
-const createUserControler = async (req, res) => {
+const createUser = async (req, res) => {
 	try {
 		const user = req.body.newUser;
-		const resObj = await Services.createUserService(user);
+		const resObj = await Services.createUser(user);
 		res.status(200).send(resObj);
 	}
 	catch (error) {
@@ -11,7 +11,7 @@ const createUserControler = async (req, res) => {
 	}
 };
 
-const createJobControler = async (req, res) => {
+const createJob = async (req, res) => {
 	const userId = req.query.userId;
 	if (!userId) {
 		res.status(400).send("User Id required");
@@ -22,7 +22,7 @@ const createJobControler = async (req, res) => {
 		res.status(400).send("New job object required");
 	};
 	try {
-		const resObj = await Services.createJobService(userId, newJob);
+		const resObj = await Services.createJob(userId, newJob);
 		res.status(200).send(resObj);
 	}
 	catch (error) {
@@ -30,7 +30,7 @@ const createJobControler = async (req, res) => {
 	}
 };
 
-const createManyJobsControler = async (req, res) => {
+const createManyJobs = async (req, res) => {
 	const { userId } = req.query;
 	if (!userId) {
 		res.status(400).send("userId required");
@@ -42,7 +42,7 @@ const createManyJobsControler = async (req, res) => {
 	};
 
 	try {
-		const resObj = await Services.createManyJobsService(userId, newJobs);
+		const resObj = await Services.createManyJobs(userId, newJobs);
 		res.status(200).send(resObj);
 	}
 	catch (error) {
@@ -50,13 +50,13 @@ const createManyJobsControler = async (req, res) => {
 	}
 };
 
-const getUserByIdControler = async (req, res) => {
+const getUserById = async (req, res) => {
 	if (!req.query.userId) {
 		res.status(400).send("userId required");
 	}
 
 	try {
-		const resObj = await Services.getUserByIdService(req.query.userId);
+		const resObj = await Services.getUserById(req.query.userId);
 		res.status(200).send(resObj);
 	}
 	catch (error) {
@@ -64,7 +64,7 @@ const getUserByIdControler = async (req, res) => {
 	}
 };
 
-const getJobsControler = async (req, res) => {
+const getJobs = async (req, res) => {
 	try {
 		const { userId } = req.query;
 		if (!userId) {
@@ -76,7 +76,7 @@ const getJobsControler = async (req, res) => {
 			res.status(400).send("jobId required as query");
 		}
 
-		const jobData = await Services.getJobsService(userId, jobId);
+		const jobData = await Services.getJobs(userId, jobId);
 		res.status(200).send(jobData);
 	}
 	catch (error) {
@@ -85,7 +85,7 @@ const getJobsControler = async (req, res) => {
 };
 
 
-const updateJobControler = async (req, res) => {
+const updateJob = async (req, res) => {
 	try {
 		const {userId} = req.query;
 		if (!userId) {
@@ -97,7 +97,7 @@ const updateJobControler = async (req, res) => {
 			res.status(400).send("jobData required as body");
 		}
 
-		const resObj = await Services.updateJobService(userId, jobData);
+		const resObj = await Services.updateJob(userId, jobData);
 		res.status(200).send(resObj);
 	}
 	catch (error) {
@@ -106,7 +106,7 @@ const updateJobControler = async (req, res) => {
 	}
 };
 
-const deleteJobControler = async (req, res) => {
+const deleteJob = async (req, res) => {
 	try {
 		const userId = req.query.userId;
 		if (!userId) {
@@ -118,22 +118,22 @@ const deleteJobControler = async (req, res) => {
 			return res.status(400).send("jobId required as query");
 		}
 
-		const returnObj = await Services.deleteJobService(userId, jobId);
+		const returnObj = await Services.deleteJob(userId, jobId);
 		res.status(200).send(returnObj);
 	}
 	catch (error) {
-		console.error("deleteJobControler, ", error)
+		console.error("deleteJob, ", error)
 		res.status(404).send(error.message);
 	}
 };
 
 
 module.exports = {
-	createUserControler,
-	createJobControler,
-	createManyJobsControler,
-	getUserByIdControler,
-	getJobsControler,
-	updateJobControler,
-	deleteJobControler,
+	createUser,
+	createJob,
+	createManyJobs,
+	getUserById,
+	getJobs,
+	updateJob,
+	deleteJob,
 };

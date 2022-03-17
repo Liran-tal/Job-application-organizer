@@ -1,6 +1,6 @@
 const User = require("../../models/user_schema");
 
-const verifyUserControler = async (req, res) => {
+const verifyUser = async (req, res) => {
 	console.log(req.query);
 	try {
 		if (!req.query.email || !req.query.password) {
@@ -20,5 +20,5 @@ const verifyUserControler = async (req, res) => {
 };
 
 module.exports = {
-	verifyUserControler
+	verifyUser
 };

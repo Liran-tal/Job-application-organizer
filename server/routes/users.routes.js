@@ -2,28 +2,28 @@ const express = require("express");
 const Router = express.Router();
 
 const {
-	createUserControler,
-	createJobControler,
-	createManyJobsControler,
-	getUserByIdControler,
-	getJobsControler,
-	updateJobControler,
-	deleteJobControler,
+	createUser,
+	createJob,
+	createManyJobs,
+	getUserById,
+	getJobs,
+	updateJob,
+	deleteJob,
 
 } = require("../controllers/users/users_controllers.js");
 
-Router.post("/create-user", createUserControler);
+Router.post("/user", createUser);
 
-Router.post("/create-job", createJobControler);
+Router.post("/job", createJob);
 
-Router.post("/create-many-jobs", createManyJobsControler);
+Router.post("/jobs", createManyJobs);
 
-Router.get("/get-user-by-id", getUserByIdControler);
+Router.get("/user", getUserById);
 
-Router.get("/get-jobs", getJobsControler);
+Router.get("/jobs", getJobs);
 
-Router.put("/update-job", updateJobControler);
+Router.put("/job", updateJob);
 
-Router.delete("/delete-job", deleteJobControler)
+Router.delete("/job", deleteJob)
 
 module.exports = Router;

@@ -1,20 +1,20 @@
 const User = require("../models/user_schema.js");
 const { findJobById } = require("../utils/utils.js");
 
-const createUserService = async (newUserData) => {
+const createUser = async (newUserData) => {
 	try {
 		const newUser = new User(newUserData);
 		const user = await newUser.save();
 		return { ok: true, data: user, message: "Success", };
 	}
 	catch (error) {
-		console.error("Error in createUserService: ", error);
+		console.error("Error in createUser: ", error);
 		throw error;
 	}
 };
 
 
-const createJobService = async (userId, newJob) => {
+const createJob = async (userId, newJob) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
@@ -36,7 +36,7 @@ const createJobService = async (userId, newJob) => {
 };
 
 
-const createManyJobsService = async (userId, newJobs) => {
+const createManyJobs = async (userId, newJobs) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
@@ -54,7 +54,7 @@ const createManyJobsService = async (userId, newJobs) => {
 	}
 };
 
-const getUserByIdService = async (id) => {
+const getUserById = async (id) => {
 	try {
 		const user = await User.findById(id);
 		return user || [];
@@ -65,7 +65,7 @@ const getUserByIdService = async (id) => {
 	}
 };
 
-const getJobsService = async (userId, jobId) => {
+const getJobs = async (userId, jobId) => {
 	try {
 		const user = await User.findById(userId).lean();
 		if (!user) {
@@ -88,7 +88,7 @@ const getJobsService = async (userId, jobId) => {
 	}
 };
 
-const updateJobService = async (userId, job) => {
+const updateJob = async (userId, job) => {
 	try {
 		const updated = await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": job._id },
@@ -106,7 +106,7 @@ const updateJobService = async (userId, job) => {
 	}
 };
 
-const deleteJobService = async (userId, jobId) => {
+const deleteJob = async (userId, jobId) => {
 	try {
 		const deleted = await User.findOneAndUpdate(
 			{ "_id": userId, "applications._id": jobId },
@@ -128,11 +128,11 @@ const deleteJobService = async (userId, jobId) => {
 
 
 module.exports = {
-	createUserService,
-	createJobService,
-	createManyJobsService,
-	getUserByIdService,
-	getJobsService,
-	updateJobService,
-	deleteJobService,
+	createUser,
+	createJob,
+	createManyJobs,
+	getUserById,
+	getJobs,
+	updateJob,
+	deleteJob,
 };

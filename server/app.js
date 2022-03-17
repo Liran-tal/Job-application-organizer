@@ -20,8 +20,8 @@ app.use("/api/users", usersRouter);
 
 app.use('/api/sign-in', signInRouter);
 
-app.get('*', (req, res) => {
-	res.status(404).send("Page Not Found");
+app.use((req, res) => {
+	res.status(404).send("Error 404: Page Not Found");
 });
 
 module.exports = app;
