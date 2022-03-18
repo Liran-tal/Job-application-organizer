@@ -22,10 +22,12 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 		try {
 			const updatedJobs = await handleSubmit(userData, setUserData, job, isNew);
 			console.log(updatedJobs);
-			setUserData({
-				...userData,
-				applications: updatedJobs
-			})
+			if (updatedJobs) {
+				setUserData({
+					...userData,
+					applications: updatedJobs
+				})
+			}
 		} catch (error) {
 			throw error;
 		}
@@ -35,10 +37,12 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 		if (job._id) {
 			try {
 				const updatedJobs = await handleJobDelete(userData, job._id);
-				setUserData({
-					...userData,
-					applications: updatedJobs
-				})
+				if (updatedJobs) {
+					setUserData({
+						...userData,
+						applications: updatedJobs
+					})
+				}
 			} catch (error) {
 				throw error;
 			}

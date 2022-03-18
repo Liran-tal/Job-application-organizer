@@ -1,4 +1,6 @@
-import axios from "axios";
+import axios from 'axios';
+import {printServerError} from '../utils/axios.util';
+
 
 const uri = process.env.ENV === "production"
   ? "https://job-application-organizer.herokuapp.com/api"
@@ -10,7 +12,7 @@ export const addUser = async (newUser) => {
   try {
     return await ApiHeader.post('/users/user', { newUser });
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -25,7 +27,7 @@ export const getUserById = async (userId) => {
     return data;
 
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -34,7 +36,7 @@ export const addJob = async (userId, newJob) => {
   try {
     return await ApiHeader.post('/users/job', { userId, newJob });
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -49,7 +51,7 @@ export const getJobs = async (userId) => {
     return data;
 
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -61,7 +63,7 @@ export const updateJob = async (userId, jobData) => {
       jobData
     });
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -75,7 +77,7 @@ export const deleteItem = async (userId, jobId) => {
       }
     });
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }
@@ -90,7 +92,7 @@ export const loginUser = async (email, password) => {
       }
     });
   } catch (error) {
-    console.error(error);
+    printServerError(error);
     throw error
   }
 }

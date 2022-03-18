@@ -15,19 +15,18 @@ function FormButtons(props) {
 		setMessage('');
 	}, [isEdit]);
 
-	const onClickSave = async (event) => {
-		console.log(isEdit);
-		// if (isEdit) {
-		// 	try {
-		// 		await onSubmit();
-		// 		setMessage(SUCCESS_MSG);
-		// 		setIsEdit(false);
-		// 		return;
-		// 	} catch (error) {
-		// 		setMessage(ERROR_MSG);
-		// 	}
-		// }
-		// setIsEdit(true);
+	const onClickSave = async() => {
+		if (isEdit) {
+			try {
+				await onSubmit();
+				setMessage(SUCCESS_MSG);
+				setIsEdit(false);
+				return;
+			} catch (error) {
+				setMessage(ERROR_MSG);
+			}
+		}
+		setIsEdit(true);
 	}
 
 	const onClickDelete = async () => {
@@ -81,7 +80,6 @@ function FormButtons(props) {
 				</Button>
 				<Button
 					name="save"
-					type='submit'
 					value={isEdit}
 					variant="contained"
 					onClick={onClickSave}
