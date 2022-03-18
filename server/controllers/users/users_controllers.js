@@ -136,11 +136,11 @@ const deleteJob = async (req, res) => {
 			return res.status(400).send("jobId required as query");
 		}
 
-		const returnObj = await Services.deleteJob(userId, jobId);
+		const result = await Services.deleteJob(userId, jobId);
 		if (!result){ 
 			return res.status(404).send("Id not found");
 		}
-		return res.status(200).send(returnObj);
+		return res.status(200).send(result);
 	}
 	catch (error) {
 		return res.status(500).send(error.message);

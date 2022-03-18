@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import {
 	useTable,
 	useGlobalFilter,
@@ -11,8 +11,14 @@ import TableNav from '../table-nav/table-nav.component';
 import BasicTable from '../basic-table/basic-table.component';
 
 function FeaturedTable({ jobsData, handleRowSelect }) {
+	const [dataState, setDataState] = useState(jobsData);
 	const columns = useMemo(() => COLUMNS, []);
-	const data = useMemo(() => jobsData, []);
+	const data = useMemo(() => jobsData, [dataState]);
+
+	useEffect(() => {
+		setDataState(jobsData);
+	}, [jobsData])
+	
 
 	const {
 		page,

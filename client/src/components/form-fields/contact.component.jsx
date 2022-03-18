@@ -41,6 +41,7 @@ function Contact({ contact, handleChangeForm, isEdit }) {
 						type="text"
 						name="position"
 						onChange={({target}) => handleChange(target)}
+						required
 						label="Position"
 						value={contact.position}
 						variant="standard"
