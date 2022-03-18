@@ -1,5 +1,5 @@
 import axios from 'axios';
-import {printServerError} from '../utils/axios.util';
+import { printServerError } from '../utils/axios.util';
 
 
 const uri = process.env.ENV === "production"
@@ -34,7 +34,7 @@ export const getUserById = async (userId) => {
 
 export const addJob = async (userId, newJob) => {
   try {
-    return await ApiHeader.post('/users/job', { userId, newJob });
+    return await ApiHeader.post('/users/job', { newJob }, { params: { userId } });
   } catch (error) {
     printServerError(error);
     throw error
@@ -43,11 +43,7 @@ export const addJob = async (userId, newJob) => {
 
 export const getJobs = async (userId) => {
   try {
-    const { data } = await ApiHeader.get('/users/jobs', {
-      params: {
-        userId
-      }
-    });
+    const { data } = await ApiHeader.get('/users/jobs', { params: { userId } });
     return data;
 
   } catch (error) {
@@ -58,10 +54,7 @@ export const getJobs = async (userId) => {
 
 export const updateJob = async (userId, jobData) => {
   try {
-    return await ApiHeader.put('/users/job', {
-      userId,
-      jobData
-    });
+    return await ApiHeader.put('/users/job', { jobData }, { params: { userId } });
   } catch (error) {
     printServerError(error);
     throw error

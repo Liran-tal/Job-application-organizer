@@ -5,7 +5,7 @@ const createUser = async (newUserData) => {
 	try {
 		const newUser = new User(newUserData);
 		const user = await newUser.save();
-		return { ok: true, data: user, message: "Success", };
+		return user;
 	}
 	catch (error) {
 		console.error("Error in createUser: ", error);
@@ -18,16 +18,12 @@ const createJob = async (userId, newJob) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
-			return { ok: false, data: undefined, message: "User not found" };
+			return false;
 		}
 
 		user.applications.push(newJob);
 		const resultUser = await user.save();
-		return { 
-			ok: true, 
-			data: resultUser.applications[resultUser.applications.length - 1],
-			message: "Success", 
-		};
+		return resultUser.applications[resultUser.applications.length - 1];			
 	}
 	catch (error) {
 		console.error(error);
@@ -40,7 +36,7 @@ const createManyJobs = async (userId, newJobs) => {
 	try {
 		const user = await User.findById(userId);
 		if (!user) {
-			return { ok: false, data: undefined, message: "User not found" };
+			return false;
 		}
 		newJobs.forEach((job) => {
 			user.applications.push(job);
@@ -57,11 +53,11 @@ const createManyJobs = async (userId, newJobs) => {
 const getUserById = async (id) => {
 	try {
 		const user = await User.findById(id);
-		return user || [];
+		return user;
 	}
 	catch (error) {
 		console.error(error);
-		throw { status: 500, message: error.message };
+		throw error;
 	}
 };
 
@@ -69,22 +65,22 @@ const getJobs = async (userId, jobId) => {
 	try {
 		const user = await User.findById(userId).lean();
 		if (!user) {
-			return { ok: false, data: undefined, message: "User not found" };
+			return false;
 		}
 
 		if (jobId) {
 			const job = findJobById(user.applications, jobId);
 			if (!job) {
-				return { ok: false, data: undefined, message: "Application Not found" };
+				return false;
 			}
-			return { ok: true, data: job, message: "Success" };
+			return job;
 		}
 
 		return user.applications;
 	}
 	catch (error) {
 		console.error(error);
-		throw { status: 500, message: error.message };
+		throw error;
 	}
 };
 
@@ -96,9 +92,9 @@ const updateJob = async (userId, job) => {
 			{ new: true }
 		)
 		if (!updated) {
-			return { ok: false, data: undefined, message: "Not found" };
+			return false;
 		}
-		return { ok: true, data: job, message: "Success" };
+		return job;
 	}
 	catch (error) {
 		console.error("Update service: ", error);
@@ -115,12 +111,13 @@ const deleteJob = async (userId, jobId) => {
 		);
 
 		if (!deleted) {
-			return { ok: false, data: undefined, message: "Not found" };
+			return false;
 		}
 
-		return { success: true, message: `objId: ${jobId} deleted` };
+		return `Job, Id: ${jobId}, deleted`;
 	} catch (error) {
-		throw { status: 404, message: error.message };
+		console.error("deleteJob, ", error);
+		throw error;
 	}
 };
 

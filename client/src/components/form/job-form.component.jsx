@@ -20,7 +20,7 @@ function JobForm({ jobData, isNew, setIsShowForm }) {
 
 	const onSubmit = async () => {
 		try {
-			const updatedJobs = await handleSubmit(userData, setUserData, job, isNew);
+			const updatedJobs = await handleSubmit(userData, job);
 			console.log(updatedJobs);
 			if (updatedJobs) {
 				setUserData({
