@@ -1,7 +1,6 @@
 const User = require("../../models/user_schema");
 
 const verifyUser = async (req, res) => {
-	console.log(req.query);
 	try {
 		if (!req.query.email || !req.query.password) {
 			throw { status: 400, message: "Request must contain email address and valid password" };
