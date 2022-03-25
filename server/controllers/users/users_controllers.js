@@ -126,12 +126,12 @@ const updateJob = async (req, res) => {
 
 const deleteJob = async (req, res) => {
 	try {
-		const userId = req.query.userId;
+		const {userId} = req.query;
 		if (!userId) {
 			return res.status(400).send("userId required as query");
 		}
 
-		const jobId = req.query.jobId;
+		const {jobId} = req.query;
 		if (!jobId) {
 			return res.status(400).send("jobId required as query");
 		}
