@@ -8,7 +8,6 @@ import { EMPTY_FORM } from '../consts/user-schema/user-schema';
 
 function UserPage() {
 	const userData = UserData.useUserContext();
-	// const setUserData = UserData.useSetUserContext();
 	const [jobsForTable, setJobsForTable] = useState(userData?.applications || []);
 	const [jobData, setJobData] = useState(null);
 	const [isShowForm, setIsShowForm] = useState(false);
