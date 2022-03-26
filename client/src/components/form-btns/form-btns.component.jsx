@@ -36,7 +36,8 @@ function FormButtons(props) {
 		}
 		try {
 			await onDelete();
-			navigate('/user');
+			setIsShowForm(false);
+			return;
 		} catch (error) {
 			setMessage(ERROR_MSG);
 		}
